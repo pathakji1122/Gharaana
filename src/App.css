@@ -36,3 +36,89 @@
     transform: rotate(360deg);
   }
 }
+.Nav{
+  font-family: "Playfair Display", serif;
+
+   height: 100px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+  font-size: 40px;
+ 
+}
+#links{
+  margin: 20px;
+  color: white;
+}
+#logo{
+     width: 1000px;
+     border-radius: 50px;
+    opacity: 0.85;
+   
+  margin-left: 225px;
+}
+.welcome{
+  margin-top: 80px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Geneva, Tahoma, sans-serif;
+   color: whitesmoke;
+  font-size: 100px;
+  text-align: center;
+}
+
+
+.container {
+  width: 455px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 21px;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.aboutbox {
+  font-size: 25px;
+  width: 1250px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 21px;
+  background-color: rgba(198, 241, 239, 0.7);
+}
+#ceo{
+  font-size: 51px;
+  text-align: right;
+}
+.topics{
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+
+}
+.labelform{
+  display: block;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+.inputform{
+
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+
+}
+.button{
+ 
+  margin-left: 142px;
+  background-color: #007bff;
+  color: #fff;
+  width: 120px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+
+
+
