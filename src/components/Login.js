@@ -1,7 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
-const Login = () => {
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+const Login = ({ onLogin }) => {
+  const history = useHistory();
   const [user, setUser] = useState(
 
     {
@@ -27,6 +29,7 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:8081/user/login', user);
       if (response.data.status == true) {
+
         console.log('Data sent successfully:', response.data);
         setUser({
 
@@ -52,6 +55,8 @@ const Login = () => {
       }
     } catch (error) {
       console.error('Error sending data:', error);
+      onLogin();
+      history.push("/")
       setUser({
 
         email: "",

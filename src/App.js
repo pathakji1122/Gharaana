@@ -14,10 +14,11 @@ import PlaceOrder from "./components/PlaceOrder";
 
 
 function App() {
-  const[userStage,setUserStage]=useState(1);
-  const updateUserStage=(newStage)=>{
-    setUserStage(newStage);
-  }
+  const[userStage,setUserStage]=useState(false);
+  const handleLogin = () => {
+    
+    setUserStage(true);
+  };
  
   return (
    <>
@@ -25,13 +26,15 @@ function App() {
 
 
        
-  {userStage === 0 && <Navbar />}
-      {userStage === 1 && <Customer/>}
-      {userStage !== 0 && userStage !== 1 && <h1>hiii</h1>}      
+  {userStage === false && <Navbar />}
+      {userStage === true && <Customer/>}
+      {/* {userStage !== 0 && userStage !== 1 && <h1>hiii</h1>}       */}
   
    <Switch>
                     <Route path="/register" component={JoinGharaana} />
-                    <Route path="/login" component={Login} />
+                    <Route path="/login">
+                    <Login onLogin={handleLogin} />
+                    </Route>
                      <Route path="/offer" component={Offer}/>
                     <Route path="/signup" component={SignUp} />
                     <Route path="/order" component={PlaceOrder}/>
