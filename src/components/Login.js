@@ -7,13 +7,8 @@ const Login = ({ onLogin }) => {
   const [user, setUser] = useState(
 
     {
-
-
       email: "",
-
       password: "",
-
-
     }
   );
 
@@ -27,17 +22,17 @@ const Login = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8081/user/login', user);
+      const response = await axios.post('  https://03eb-117-246-29-123.ngrok-free.app /user/login', user);
       if (response.data.status == true) {
            if(response.data.worker==true){
        
         window.alert(`Login Success`)
-        onLogin(1);
+        onLogin(2);
         
       }
       else {
         window.alert(`Login Done`)
-        onLogin(2);
+        onLogin(1);
       }
       
     }else{
