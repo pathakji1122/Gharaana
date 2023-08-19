@@ -24,7 +24,10 @@ const Join=()=>{
     }));
   };
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(
+      expert=""
+    );
+
     try {
       const response = await axios.post('http://localhost:8081/worker/signup', expert);
       if(response.data.accountCreated==true){
@@ -61,7 +64,7 @@ const Join=()=>{
         location: "",
         expertise: "",
       });
-      // Handle error, like showing an error message
+      
     }
   };  
  

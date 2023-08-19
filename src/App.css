@@ -108,9 +108,8 @@
 
 }
 .button{
- 
   margin-left: 142px;
-  background-color: #007bff;
+  background-color: #b9cf37;
   color: #fff;
   width: 120px;
   padding: 10px 15px;
@@ -118,7 +117,39 @@
   border-radius: 3px;
   cursor: pointer;
 }
+#customernav{
+  width: 1400x;
+   text-align: center;
+  font-size: 25px;
+  height: 70px;
+  
+  background-color:rgb(143, 126, 80);
+}
+#images{
+  margin-left:50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 11px;
+}
 
+.option{
+  border-radius: 4px;
+  margin-left: 1125px;
+  width: 125px;
+  height: 110px;
+  text-align: center;
+  background-color: #fff;
+}
+.icon-button{
+  border-radius: 11px;
+  margin-left: 100px;
+}
+
+#pi{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 20px;
+  color: #222732;
+}
 
 
 
