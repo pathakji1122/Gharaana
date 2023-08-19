@@ -24,9 +24,7 @@ const Join=()=>{
     }));
   };
   const handleSubmit = async (e) => {
-    e.preventDefault(
-      expert=""
-    );
+    
 
     try {
       const response = await axios.post('http://localhost:8081/worker/signup', expert);
@@ -118,6 +116,7 @@ const Join=()=>{
     <option value="" disabled>Select Your location</option>
     <option value="HYDERABAD">Hyderabad</option>
     <option value="MUMBAI">MUMBAI</option>
+    <option value="BANGALORE">BANGALORE</option>
     <option value="GUNTAKAL">Guntakal</option>
     <option value="CHURU">Churu</option>
    
@@ -131,6 +130,7 @@ const Join=()=>{
     <option value="" disabled>Select Your Expertise</option>
     <option value="CA">C.A.</option>
     <option value="ASSISTANT">Assistant</option>
+    <option value="ENGINEER">ENGINEER</option>
     <option value="MECHANIC">Mechanic</option>
     <option value="DRIVER">Driver</option>
    

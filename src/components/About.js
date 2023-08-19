@@ -1,8 +1,9 @@
 import React from "react";
-import logo from "./GHARAANA_page-0001.jpg";
+import logo from "./images/GHARAANA_page-0001.jpg";
 const About=()=>{
   return<>
        < img id="logo" src={logo}   alt="logo" />
+       
 
 
        <div class="aboutbox">

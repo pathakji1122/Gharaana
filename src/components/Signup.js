@@ -127,7 +127,7 @@ return<>
   
 <br>
 </br>
-<button className="button" onClick={handleSubmit} type="submit">Register</button>
+<button className="button" onClick={handleSubmit} type="submit">SignUp</button>
   
     </form>
 

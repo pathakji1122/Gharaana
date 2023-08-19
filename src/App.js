@@ -11,13 +11,14 @@ import Offer from "./components/Offer";
 import { Router } from "react-router-dom/cjs/react-router-dom.min";
 import Customer from "./components/Customer";
 import PlaceOrder from "./components/PlaceOrder";
+import Expert from "./components/Expert";
 
 
 function App() {
-  const[userStage,setUserStage]=useState(false);
-  const handleLogin = () => {
+  const[userStage,setUserStage]=useState(0);
+  const handleLogin = (newUserStage) => {
     
-    setUserStage(true);
+    setUserStage(newUserStage);
   };
  
   return (
@@ -26,9 +27,9 @@ function App() {
 
 
        
-  {userStage === false && <Navbar />}
-      {userStage === true && <Customer/>}
-      {/* {userStage !== 0 && userStage !== 1 && <h1>hiii</h1>}       */}
+  {userStage === 0 && <Navbar />}
+      {userStage === 1 && <Customer/>}
+       {userStage !== 0 && userStage !== 1 && <Expert/>}    
   
    <Switch>
                     <Route path="/register" component={JoinGharaana} />

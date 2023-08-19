@@ -1,9 +1,9 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
-import profile from "./profile.png"
+import profile from "./images/profile.png"
 import { useState } from "react";
 const Customer=()=>{
-    const[customerLoggedIn,setCustomerLoggedIn]=useState(false);
+    
     const [showOptions, setShowOptions] = useState(false);
       
         const toggleOptions = () => {

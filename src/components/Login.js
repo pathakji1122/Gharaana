@@ -29,33 +29,24 @@ const Login = ({ onLogin }) => {
     try {
       const response = await axios.post('http://localhost:8081/user/login', user);
       if (response.data.status == true) {
-
-        console.log('Data sent successfully:', response.data);
-        setUser({
-
-          email: "",
-
-          password: "",
-
-
-        });
-        window.alert(`welcome to gharaana`)
+           if(response.data.worker==true){
+       
+        window.alert(`Login Success`)
+        onLogin(1);
         
       }
-      
       else {
-        setUser({
-
-          email: "",
-
-          password: "",
-
-        });
-        window.alert(` : ${response.data.response}`)
+        window.alert(`Login Done`)
+        onLogin(2);
       }
-    } catch (error) {
+      
+    }else{
+      window.alert('${response.data.response}')
+    }
+    
+   } catch (error) {
       console.error('Error sending data:', error);
-      onLogin();
+      
       history.push("/")
       setUser({
 
@@ -107,7 +98,7 @@ const Login = ({ onLogin }) => {
 
         <br>
         </br>
-        <button className="button" onClick={handleSubmit} type="submit">Register</button>
+        <button className="button" onClick={handleSubmit} type="submit">Login</button>
 
       </form>
 
