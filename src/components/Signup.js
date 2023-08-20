@@ -26,7 +26,7 @@ const handleInputs = (e)=>{
 const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const response = await axios.post('http://localhost:8081/customer/signup', customer);
+    const response = await axios.post('https://gharaanav1-1.onrender.com/customer/signup', customer);
     if(response.data.accountCreated==true){
     console.log('Data sent successfully:', response.data);
     setCustomer({
