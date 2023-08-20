@@ -25,14 +25,18 @@ const Login = ({ onLogin }) => {
       const response = await axios.post(' https://gharaanav1-1.onrender.com/user/login', user);
       if (response.data.status == true) {
            if(response.data.worker==true){
-       
+            
         window.alert(`Login Success`)
+       
         onLogin(2);
+        history.push("/")
         
       }
       else {
         window.alert(`Login Done`)
+        
         onLogin(1);
+        history.push("/")
       }
       
     }else{
