@@ -23,8 +23,8 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
     try {
       const response = await axios.post('/user/login', user);
-      if (response.data.status == true) {
-           if(response.data.worker==false){
+      if (response.data.status === true) {
+           if(response.data.worker===false){
             
         window.alert(`Login Success`)
        
@@ -32,7 +32,7 @@ const Login = ({ onLogin }) => {
        // history.push("/")
         
       }
-      else if(response.data.worker==true) {
+      else if(response.data.worker===true) {
         window.alert(`Login Done`) 
         onLogin(2);
         history.push("/")

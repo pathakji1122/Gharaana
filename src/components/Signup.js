@@ -27,7 +27,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   try {
     const response = await axios.post('/customer/signup', customer);
-    if(response.data.accountCreated==true){
+    if(response.data.accountCreated===true){
     console.log('Data sent successfully:', response.data);
     setCustomer({
       customerName: "",
@@ -51,7 +51,7 @@ const handleSubmit = async (e) => {
     });
     window.alert(` hiii : ${response.data.response}`)
   }
- } catch (error) {
+ }  catch (error) {
     console.error('Error sending data:', error);
     setCustomer({
       customerName: "",
