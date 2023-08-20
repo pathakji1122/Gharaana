@@ -24,8 +24,7 @@ const Join=()=>{
     }));
   };
   const handleSubmit = async (e) => {
-    
-
+    e.preventDefault();
     try {
       const response = await axios.post(' https://gharaanav1-1.onrender.com/worker/signup', expert);
       if(response.data.accountCreated==true){
@@ -42,14 +41,7 @@ const Join=()=>{
       // Handle success, like showing a success message
     }
     else{
-      setExpert({
-        expertName: "",
-        email: "",
-        phoneNo: "",
-        password: "",
-        location: "",
-        expertise: "",
-      });
+      
       window.alert(` : ${response.data.response}`)
     }
    } catch (error) {

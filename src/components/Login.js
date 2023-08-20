@@ -24,36 +24,30 @@ const Login = ({ onLogin }) => {
     try {
       const response = await axios.post(' https://gharaanav1-1.onrender.com/user/login', user);
       if (response.data.status == true) {
-           if(response.data.worker==true){
+           if(response.data.worker==false){
             
         window.alert(`Login Success`)
        
-        onLogin(2);
-        history.push("/")
+        onLogin(1);
+       // history.push("/")
         
       }
-      else {
-        window.alert(`Login Done`)
-        
-        onLogin(1);
+      else if(response.data.worker==true) {
+        window.alert(`Login Done`) 
+        onLogin(2);
         history.push("/")
       }
       
-    }else{
-      window.alert('${response.data.response}')
     }
     
    } catch (error) {
       console.error('Error sending data:', error);
+      window.alert("try again")
       
       history.push("/")
       setUser({
-
         email: "",
-
         password: "",
-
-
       });
       // Handle error, like showing an error message
     }
