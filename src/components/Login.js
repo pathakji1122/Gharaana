@@ -29,7 +29,7 @@ const Login = ({ onLogin }) => {
         window.alert(`Login Success`)
        
         onLogin(1);
-       // history.push("/")
+       
         
       }
       else if(response.data.worker===true) {
