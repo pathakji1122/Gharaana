@@ -27,7 +27,7 @@ const Join=()=>{
     e.preventDefault();
     try {
       const response = await axios.post(' https://gharaanav1-1.onrender.com/worker/signup', expert);
-      if(response.data.accountCreated==true){
+      if(response.data.accountCreated===true){
       console.log('Data sent successfully:', response.data);
       setExpert({
         expertName: "",
