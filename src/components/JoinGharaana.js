@@ -26,7 +26,7 @@ const Join=()=>{
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/worker/signup', expert);
+      const response = await axios.post('https://gharaanav1-1.onrender.com/worker/signup', expert);
       if(response.data.accountCreated===true){
       console.log('Data sent successfully:', response.data);
       setExpert({
@@ -40,7 +40,7 @@ const Join=()=>{
       window.alert(`welcome to gharaana : ${expert.expertName}`)
       // Handle success, like showing a success message
     }
-    else{
+    else if(response.data.accountCreated===false){
       
       window.alert(` : ${response.data.response}`)
     }

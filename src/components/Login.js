@@ -22,7 +22,7 @@ const Login = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/user/login', user);
+      const response = await axios.post('https://gharaanav1-1.onrender.com/user/login', user);
       if (response.data.status === true) {
            if(response.data.worker===false){
             
