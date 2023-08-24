@@ -50,7 +50,7 @@ const CreateOrder=()=>{
           const authToken = Cookies.get("authToken"); // Get the authentication token from cookies
       
           const response = await axios.post(
-            'http://localhost:8081/customer/placeorder',
+            'https://gharaanav1-1.onrender.com/customer/placeorder',
             {
               ...order,
               placedFor: order.placedFor, // Use the formatted date
