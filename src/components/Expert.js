@@ -24,7 +24,7 @@ return(
      <div id="customernav">
              <NavLink onClick={toggleClickOptions}id="links" to="/">Home</NavLink>
 
-            <NavLink  onClick={toggleClickOptions} id="links"  to="/offer" >Clients </NavLink>
+            <NavLink  onClick={toggleClickOptions} id="links"  to="/clients" >Clients </NavLink>
            
            
             <NavLink onClick={toggleClickOptions} id="links" to="/rder"> Post Advertisement</NavLink>

@@ -26,7 +26,7 @@ const Join=()=>{
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://gharaanav1-1.onrender.com/worker/signup', expert);
+      const response = await axios.post('http://localhost:8081/expert/signup', expert);
       if(response.data.accountCreated===true){
       console.log('Data sent successfully:', response.data);
       setExpert({
@@ -45,6 +45,7 @@ const Join=()=>{
       window.alert(` : ${response.data.response}`)
     }
    } catch (error) {
+
       console.error('Error sending data:', error);
       setExpert({
         expertName: "",
@@ -121,11 +122,19 @@ const Join=()=>{
           value={expert.expertise} onChange={handleInputs}>
     <option value="" disabled>Select Your Expertise</option>
     <option value="CA">C.A.</option>
-    <option value="ASSISTANT">Assistant</option>
-    <option value="ENGINEER">ENGINEER</option>
-    <option value="MECHANIC">Mechanic</option>
-    <option value="DRIVER">Driver</option>
-   
+    <option value="ASSISTANT">House Maintainance</option>
+    <option value="ENGINEER">Appliances Installation & Repairing</option>
+    <option value="ENGINEER">Appliances Repairing</option>
+    <option value="MECHANIC">Electrician</option>
+    <option value="DRIVER">Health & Wellnes</option>
+    <option value="DRIVER">Beauty and Fitness</option>
+    <option value="DRIVER">Child Care</option>
+    <option value="DRIVER">Event Management</option>
+    <option value="DRIVER">Pet Care</option>
+    <option value="DRIVER">Renovations and Improvement</option>
+    <option value="DRIVER">Moving and Packing Services</option>
+    <option value="DRIVER">Automotive Services</option>
+     
   </select>
 </div>   
       

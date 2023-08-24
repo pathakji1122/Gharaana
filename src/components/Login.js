@@ -1,9 +1,12 @@
 import React from "react";
 import axios from "axios";
+import Cookies from "js-cookie"; 
 import { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const Login = ({ onLogin }) => {
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
+  
   const [user, setUser] = useState(
 
     {
@@ -21,26 +24,31 @@ const Login = ({ onLogin }) => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
-      const response = await axios.post('https://gharaanav1-1.onrender.com/user/login', user);
+      const response = await axios.post('http://localhost:8081/user/login', user);
       if (response.data.status === true) {
-           if(response.data.worker===false){
+           if(response.data.expert===false){
+            Cookies.set('authToken', response.data.token, { expires: 7 });
             
         window.alert(`Login Success`)
        
         onLogin(1);
-       
+        localStorage.setItem('userStage', '1');
+        history.push("/")
         
       }
-      else if(response.data.worker===true) {
+      else if(response.data.expert===true) {
+        Cookies.set('authToken', response.data.token, { expires: 7 });
         window.alert(`Login Done`) 
         onLogin(2);
+        localStorage.setItem('userStage', '2');
         history.push("/")
       }
       
     }
     else if(response.data.status===false){
-      window.alert('password invalid')
+      window.alert(`${response.data.response} `);
     }
     
    } catch (error) {
@@ -68,7 +76,7 @@ const Login = ({ onLogin }) => {
 
         <div>
           <label className="labelform" htmlFor="email">Email</label>
-          <input className="inputform" type="text"
+          <input className="inputform" type="text" autoComplete="off"
             value={user.email}
             onChange={handleInputs}
             name="email" id="email" />
@@ -76,7 +84,7 @@ const Login = ({ onLogin }) => {
         </div>
         <div>
           <label className="labelform" htmlFor="password">Password</label>
-          <input className="inputform" type="text"
+          <input className="inputform" type="text" autoComplete="off"
             value={user.password}
             onChange={handleInputs}
             name="password" id="password" />
