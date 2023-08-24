@@ -5,8 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #666666;
-background-image: url("components/images/bgog.jpg");
+  background-color: white;
+  
 background-position: center;
 background-size: cover;
 background-repeat: no-repeat;

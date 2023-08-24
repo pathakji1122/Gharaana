@@ -2,8 +2,11 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import profile from "./images/profile.png"
 import { useState } from "react";
-const Customer=()=>{
-    
+import Cookies from "js-cookie";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+const Customer=( {  })=>{
+  const history = useHistory();
+ 
     const [showOptions, setShowOptions] = useState(false);
       
         const toggleOptions = () => {
@@ -12,8 +15,8 @@ const Customer=()=>{
         const toggleClickOptions = () => {
             setShowOptions(false);
           };
-
-
+         
+          
 
     return(
         <>
@@ -24,7 +27,7 @@ const Customer=()=>{
                 <NavLink  onClick={toggleClickOptions} id="links"  to="/offer" >Offers for You </NavLink>
                
                
-                <NavLink onClick={toggleClickOptions} id="links" to="/rder"> PlaceOrder</NavLink>
+                <NavLink onClick={toggleClickOptions} id="links" to="/order"> PlaceOrder</NavLink>
                 <NavLink onClick={toggleClickOptions} id="links" to="/premium">Upgrade To PREMIUM</NavLink>
                  
                 <button  onClick={toggleOptions} class="icon-button">
@@ -34,13 +37,13 @@ const Customer=()=>{
 {showOptions && (
         <div className="option">
             <div>
-            <NavLink id="pi"  to="/option1">My Orders</NavLink>
+            <NavLink id="pi"  to="/myorders">My Orders</NavLink>
             </div>
           <div>
-          <NavLink id="pi" to="/option2">Profile</NavLink>
+          <NavLink id="pi" to="/profile">Profile</NavLink>
           </div>
          <div>
-         <NavLink id="pi" to="/option3">Logout</NavLink>
+         <NavLink id="pi"  to="/logout">Logout</NavLink>
          </div>
          
 

@@ -37,18 +37,19 @@
   }
 }
 .Nav{
-  font-family: "Playfair Display", serif;
-
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  
    height: 100px;
    display: flex;
    justify-content: center;
-   align-items: center;
-  font-size: 40px;
+   align-items: right;
+  font-size: 25px;
+  color: black;
  
 }
 #links{
   margin: 20px;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 #logo{
      width: 1000px;
@@ -63,6 +64,7 @@
    color: whitesmoke;
   font-size: 100px;
   text-align: center;
+  color: #282c34;
 }
 .text{
   margin-top: 55px;
