@@ -38,7 +38,7 @@ const Clients = () => {
             <button onClick={() => handleButtonClick(clients.orderId)} className="order-button">
               Accept
             </button>
-            {orderid === clients.orderId && <AcceptOrder orderid={order.orderId} />}
+         
           </div>
         ))}
       </div>
