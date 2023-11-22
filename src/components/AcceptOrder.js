@@ -1,7 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useState } from "react";
 const AcceptOrder = ({ orderid }) => {
-  const [accept, setAccept] = useState();
   useEffect(() => {
     acceptOrderUrl();
   }, []);
@@ -14,7 +16,6 @@ const AcceptOrder = ({ orderid }) => {
         }
       });
       setAccept(response.data.status)
-      setOrder(response.data.order);
 
     } catch (error) {
       console.error('Error fetching orders:', error);
