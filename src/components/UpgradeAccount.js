@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import Cookies from "js-cookie";
 const UpgradeAccount = () => {
   const [premium, setPremium] = useState(false);
  
