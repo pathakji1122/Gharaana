@@ -15,19 +15,18 @@ const AcceptOrder = ({ orderid }) => {
           Authorization: `Bearer ${authToken}`
         }
       });
-      setAccept(response.data.status)
-
+  
     } catch (error) {
       console.error('Error fetching orders:', error);
     }
   };
   return (
     <>
-      {accept === false && <div>
+      { <div>
         Sorry
       </div>
       }
-      {accept === true && <div>
+      { <div>
         Order Accepted
       </div>}
     </>
