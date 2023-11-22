@@ -20,10 +20,11 @@ import UpgradeAccount from "./components/UpgradeAccount";
 import Cookies from "js-cookie";
 
 import { useHistory } from "react-router-dom";
+import Clients from "./components/Clients";
 function App() {
-  const[userStage,setUserStage]=useState(0);
+  const[userStage,setUserStage]=useState(1);
   
-
+    
  
   useEffect(() => {
     const storedUserStage = localStorage.getItem('userStage');
@@ -79,7 +80,7 @@ function App() {
       </Route>
                     <Route path="/about" component={About} />
                     <Route path="/premium" component={UpgradeAccount} />
-                
+                     <Route path="/clients" component={Clients}/>
                     <Route path="/" component={Home}/>
 
           

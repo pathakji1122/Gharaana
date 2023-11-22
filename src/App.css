@@ -82,6 +82,15 @@
   border-radius: 21px;
   background-color: rgba(255, 255, 255, 0.7);
 }
+
+.joincontainer {
+  width: 855px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 21px;
+  background-color: rgba(255, 255, 255, 0.7);
+}
 .aboutbox {
   font-size: 25px;
   width: 1250px;
@@ -102,19 +111,61 @@
 
 }
 .labelform{
-  display: block;
+  display: inline;
   font-size: 15px;
   margin-bottom: 5px;
 }
+
 .inputform{
 
-  width: 100%;
+
+  width: 400px;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
+  
 
 }
+.inputjoinform{
+
+
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-left: 10px;
+  margin: 10px;
+
+}
+.inputjoinforml2{
+
+  
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-left: 10px;
+  margin: 10px;
+
+}
+.joinforum{
+
+  display: inline;
+}
+.joinforuml2{
+
+  margin-left: 10px;
+  display: inline-block;
+}
+
+
+
+
+
+
 .button{
   margin-left: 142px;
   background-color: #b9cf37;
@@ -186,4 +237,27 @@
   margin-left: 120px;
   color: wheat;
 }
-
+.order-card{
+  height: 250px;
+  width: 250px;
+  border-color:#222732;
+  display: inline-block;
+  background-color: #fff;
+  border-color: #222732;
+  border-radius: 20px;
+  margin: 10px;
+  border-style:solid;
+  box-shadow:#222732;
+}
+.order-button{
+  margin-top: 101px;
+  margin-left: 65px;
+  background-color: #b9cf37;
+  color: #fff;
+  width: 120px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  
+}

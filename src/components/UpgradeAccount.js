@@ -2,26 +2,37 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-const UpgradeAccount=()=>{
-    const[premium,setPremium]=useState(false);
-    useEffect(() => {
-        // Perform API call here to check subscription status using the token
-        // Replace 'yourTokenHere' with the actual token
-        axios.get('http://your-api-url/check-subscription', {
-          headers: {
-            Authorization: `Bearer yourTokenHere`,
-          },
-        })
-        .then(response => {
-          // Assuming response.data contains subscription status (true/false)
-          setPremium(response.data.isPremium);
-        })
-        .catch(error => {
-          console.error('Error checking subscription:', error);
-        });
-      }, []);
-    return(<>
-    </>
-    )
+const UpgradeAccount = () => {
+  const [premium, setPremium] = useState(false);
+ 
+  useEffect(() => {
+    premiumStatus();
+  }, []);
+
+
+  
+  const premiumStatus = async () => {
+    try {
+      const authToken = Cookies.get("authToken");
+      const response = await axios.get('http://localhost:8081/customer/premium', {
+        headers: {
+          Authorization: `Bearer ${authToken}`
+        }
+      });
+
+      setPremium(response.data.premium);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    }
+  };
+  return (<>
+   (premium===true && <div>
+    You Are premium User
+    </div>)
+    (premium===false )
+
+
+  </>
+  )
 }
 export default UpgradeAccount;
