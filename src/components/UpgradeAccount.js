@@ -8,10 +8,7 @@ const UpgradeAccount = () => {
  
   useEffect(() => {
     premiumStatus();
-  }, []);
-
-
-  
+  }, []);  
   const premiumStatus = async () => {
     try {
       const authToken = Cookies.get("authToken");
