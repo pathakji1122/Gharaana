@@ -26,7 +26,7 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:8081/user/login', user);
+      const response = await axios.post('user/login', user);
       if (response.data.status === true) {
         if (response.data.expert === false) {
           Cookies.set('authToken', response.data.token, { expires: 7 });
