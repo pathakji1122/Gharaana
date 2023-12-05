@@ -23,10 +23,6 @@ const AcceptOrder = ({ orderid }) => {
   return (
     <>
       { <div>
-        Sorry
-      </div>
-      }
-      { <div>
         Order Accepted
       </div>}
     </>

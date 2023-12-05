@@ -22,7 +22,7 @@ import Cookies from "js-cookie";
 import { useHistory } from "react-router-dom";
 import Clients from "./components/Clients";
 function App() {
-  const[userStage,setUserStage]=useState(1);
+  const[userStage,setUserStage]=useState(0);
   
     
  
