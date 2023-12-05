@@ -5,12 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: rgb(238,174,216);
-  background: radial-gradient(circle, rgba(238,174,216,1) 0%, rgba(148,210,233,1) 100%);
-  
-background-position: center;
-background-size: cover;
-background-repeat: no-repeat;
+  background: rgb(238, 174, 216);
+  background: radial-gradient(circle, rgba(238, 174, 216, 1) 0%, rgba(148, 210, 233, 1) 100%);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-x: auto; /* Enable horizontal scroll if needed */
+  overflow-y: auto; /* Enable vertical scroll if needed */
 }
 
 code {
