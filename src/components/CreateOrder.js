@@ -19,10 +19,11 @@ const CreateOrder = () => {
       const timeValue = name === "placedForTime" ? value : order.placedForTime;
       const date = new Date(dateValue);
       const hours = timeValue.split(":")[0];
+      const minutes = timeValue.split(":")[1];
       const day = date.getDate();
       const month = (date.getMonth() + 1).toString().padStart(2, "0");
       const year = date.getFullYear();
-      const formattedDate = `${hours}:${day}:${month}:${year}`;
+      const formattedDate = `${hours}:${minutes}:${day}:${month}:${year}`;
       setOrder((prevData) => ({
         ...prevData,
         placedFor: formattedDate,
@@ -36,13 +37,14 @@ const CreateOrder = () => {
       }));
     }
   };
+  
   const today = new Date().toISOString().split("T")[0];
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const authToken = Cookies.get("authToken"); // Get the authentication token from cookies
       const response = await axios.post(
-        'http://localhost:8081/customer/placeorder',
+        '/customer/placeorder',
         {
           ...order,
           placedFor: order.placedFor, // Use the formatted date
