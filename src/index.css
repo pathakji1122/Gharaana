@@ -1,3 +1,8 @@
+/* Set a base font size on the root element */
+html {
+  font-size: 16px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,8 +15,28 @@ body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  overflow-x: auto; /* Enable horizontal scroll if needed */
-  overflow-y: auto; /* Enable vertical scroll if needed */
+  overflow-x: auto;
+  overflow-y: auto;
+  font-size: 1rem; /* Set a base font size */
+}
+
+/* Adjust font size for smaller screens */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 0.8rem;
+  }
+}
+
+/* Center the container using a percentage-based width */
+.container {
+  width: 80%;
+  margin: 0 auto;
 }
 
 code {
@@ -19,3 +44,11 @@ code {
     monospace;
 }
 
+/* Flexbox example for a responsive layout */
+@media screen and (max-width: 768px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
