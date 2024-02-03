@@ -26,7 +26,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/customer/signup', customer);
+      const response = await axios.post('https://mutual-warthog-locally.ngrok-free.app/customer/signup', customer);
       if (response.data.accountCreated === true) {
         console.log('Data sent successfully:', response.data);
         setCustomer({
