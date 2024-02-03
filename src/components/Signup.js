@@ -40,7 +40,7 @@ const SignUp = () => {
         window.alert(`welcome to gharaana : ${customer.customerName}`)
         // Handle success, like showing a success message
       }
-      else if (response.data.accountCreated === true) {
+      else if (response.data.accountCreated === false) {
         setCustomer({
           customerName: "",
           email: "",
@@ -106,8 +106,6 @@ const SignUp = () => {
             name="email" id="email" />
 
         </div>
-
-
         <div>
           <label className="labelform" htmlFor="location">Location</label>
           <select className="inputform" id="location" name="location"
@@ -117,7 +115,6 @@ const SignUp = () => {
             <option value="MUMBAI">MUMBAI</option>
             <option value="GUNTAKAL">Guntakal</option>
             <option value="CHURU">Churu</option>
-
           </select>
         </div>
 
