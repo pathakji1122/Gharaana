@@ -26,7 +26,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://mutual-warthog-locally.ngrok-free.app/customer/signup', customer);
+      const response = await axios.post('https://gharaanah.onrender.com/customer/signup', customer);
       if (response.data.accountCreated === true) {
         console.log('Data sent successfully:', response.data);
         setCustomer({
@@ -38,7 +38,6 @@ const SignUp = () => {
 
         });
         window.alert(`welcome to gharaana : ${customer.customerName}`)
-        // Handle success, like showing a success message
       }
       else if (response.data.accountCreated === false) {
         setCustomer({

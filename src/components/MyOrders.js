@@ -21,7 +21,7 @@ const MyOrders = () => {
   const fetchOrders = async () => {
     try {
       const authToken = Cookies.get("authToken");
-      const response = await axios.get('http://localhost:8081/customer/myorder', {
+      const response = await axios.get('https://gharaanah.onrender.com/customer/myorder', {
         headers: {
           Authorization: `Bearer ${authToken}`
         }

@@ -23,10 +23,7 @@ const Customer = ({ }) => {
 
       <div id="customernav">
         <NavLink onClick={toggleClickOptions} id="links" to="/">Home</NavLink>
-
         <NavLink onClick={toggleClickOptions} id="links" to="/offer" >Offers for You </NavLink>
-
-
         <NavLink onClick={toggleClickOptions} id="links" to="/order"> PlaceOrder</NavLink>
         <NavLink onClick={toggleClickOptions} id="links" to="/premium">Gharaana PREMIUM</NavLink>
 
@@ -49,9 +46,6 @@ const Customer = ({ }) => {
 
         </div>
       )}
-
-
-
     </>
 
   )

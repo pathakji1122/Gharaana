@@ -43,7 +43,7 @@ const CreateOrder = () => {
     e.preventDefault();
     try {
       const authToken = Cookies.get("authToken"); // Get the authentication token from cookies
-      const response = await axios.post('https://mutual-warthog-locally.ngrok-free.app/customer/placeorder',
+      const response = await axios.post('https://gharaanah.onrender.com/customer/placeorder',
         {
           ...order,
           placedFor: order.placedFor, // Use the formatted date

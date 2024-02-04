@@ -9,7 +9,7 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get('https://example.com/api/orders', {
+      const response = await axios.get('https://gharaanah.onrender.com/api/orders', {
         headers: {
           Authorization: `Bearer ${authToken}`
         }
