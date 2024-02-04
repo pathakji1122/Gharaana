@@ -48,7 +48,7 @@ const Join = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8081/expert/signup', expert);
+      const response = await axios.post('https://gharaanah.onrender.com/expert/signup', expert);
       if (response.data.accountCreated === true) {
         console.log('Data sent successfully:', response.data);
         

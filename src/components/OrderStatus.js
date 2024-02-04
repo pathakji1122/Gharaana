@@ -12,7 +12,7 @@ const OrderStatus = ({ orderId }) => {
   const fetchOrderStatus = async () => {
     try {
       const authToken = Cookies.get("authToken");
-      const response = await axios.post('http://localhost:8081/customer/orderstatus', {orderId}, {
+      const response = await axios.post('https://gharaanah.onrender.com/customer/orderstatus', {orderId}, {
         headers: {
           Authorization: `Bearer ${authToken}`
         }
