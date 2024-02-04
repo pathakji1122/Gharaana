@@ -12,7 +12,7 @@ const UpgradeAccount = () => {
   const premiumStatus = async () => {
     try {
       const authToken = Cookies.get("authToken");
-      const response = await axios.get('http://localhost:8081/customer/premium', {
+      const response = await axios.get('https://gharaanah.onrender.com/customer/premium', {
         headers: {
           Authorization: `Bearer ${authToken}`
         }
