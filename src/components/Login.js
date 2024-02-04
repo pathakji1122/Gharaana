@@ -26,7 +26,7 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post('https://mutual-warthog-locally.ngrok-free.app/user/login', user);
+      const response = await axios.post('https://gharaanah.onrender.com/user/login', user);
       if (response.data.status === true) {
         if (response.data.expert === false) {
           Cookies.set('authToken', response.data.token, { expires: 7 });
@@ -36,7 +36,6 @@ const Login = ({ onLogin }) => {
           onLogin(1);
           localStorage.setItem('userStage', '1');
           history.push("/")
-
         }
         else if (response.data.expert === true) {
           Cookies.set('authToken', response.data.token, { expires: 7 });
