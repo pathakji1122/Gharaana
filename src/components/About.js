@@ -3,6 +3,7 @@ import logo from "./images/GHARAANA_page-0001.jpg";
 const About = () => {
   return <>
     <div className="aboutbox">
+
       <p>Transforming Your Home</p>
       <p>At Gharaana, we're dedicated to simplifying your life by providing on-demand home services that are affordable and reliable. Our core mission is to enhance your living experience by offering a wide range of services, all accessible through our user-friendly app.</p>
       <p>Our Commitment to Security:</p>
