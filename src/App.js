@@ -14,13 +14,13 @@ import Customer from "./components/Customer";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import Expert from "./components/Expert";
 import MyOrders from "./components/MyOrders";
-import CreateOrder from "./components/CreateOrder";
 import Logout from "./components/Logout";
 import UpgradeAccount from "./components/UpgradeAccount";
 import Cookies from "js-cookie";
 
 import { useHistory } from "react-router-dom";
 import Clients from "./components/Clients";
+import PlaceOrder from "./components/PlaceOrder";
 function App() {
   const[userStage,setUserStage]=useState(0);
   
@@ -70,7 +70,7 @@ function App() {
            <Route path="/home" component={Home}/>
            <Route path="/offer" component={Offer}/>
             <Route path="/myorders" component={MyOrders} />
-              <Route path="/order" component={CreateOrder}/>
+              <Route path="/placeorder" component={PlaceOrder}/>
          
           
       

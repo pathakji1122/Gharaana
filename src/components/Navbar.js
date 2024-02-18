@@ -10,7 +10,6 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
-import AdbIcon from "@mui/icons-material/Adb";
 import Paper from "@mui/material/Paper";
 
 const pages = [
@@ -35,7 +34,7 @@ const Navbar = () => {
   return (
     <>
       <Paper elevation={3}>
-        <AppBar position="static" sx={{ background: "#27CFA0" }}>
+        <AppBar position="static" sx={{ background: "white",borderRadius: "20px" }}>
           <Container maxWidth="xl">
             <Toolbar
               disableGutters

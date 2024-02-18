@@ -1,20 +1,43 @@
 import React from "react";
-import "../App.css"
 import axios from "axios";
 import { useState } from "react";
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Autocomplete from '@mui/material/Autocomplete';
+import Stack from '@mui/material/Stack';
+
 const SignUp = () => {
-  const [customer, setCustomer] = useState(
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [selectedLocation, setSelectedLocation] = React.useState(null);
 
-    {
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-      customerName: "",
-      email: "",
-      phoneNo: "",
-      password: "",
-      location: "",
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
-    }
-  );
+  const locations = [
+    'Hyderabad',
+    'Mumbai',
+    'Bangalore',
+    'Guntakal',
+    'Churu',
+    // Add more locations as needed
+  ];
+
+  const [customer, setCustomer] = useState({
+    customerName: "",
+    email: "",
+    phoneNo: "",
+    password: "",
+    location: "",
+  });
 
   const handleInputs = (e) => {
     const { name, value } = e.target;
@@ -23,10 +46,15 @@ const SignUp = () => {
       [name]: value,
     }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://gharaanah.onrender.com/customer/signup', customer);
+      const response = await axios.post('https://gharaanah.onrender.com/customer/signup', {
+        ...customer,
+        location:selectedLocation,
+      });
+
       if (response.data.accountCreated === true) {
         console.log('Data sent successfully:', response.data);
         setCustomer({
@@ -35,20 +63,17 @@ const SignUp = () => {
           phoneNo: "",
           password: "",
           location: "",
-
         });
-        window.alert(`welcome to gharaana : ${customer.customerName}`)
-      }
-      else if (response.data.accountCreated === false) {
+        window.alert(`Welcome to Gharaana: ${customer.customerName}`);
+      } else if (response.data.accountCreated === false) {
         setCustomer({
           customerName: "",
           email: "",
           phoneNo: "",
           password: "",
           location: "",
-
         });
-        window.alert(` hiii : ${response.data.response}`)
+        window.alert(`Error: ${response.data.response}`);
       }
     } catch (error) {
       console.error('Error sending data:', error);
@@ -58,84 +83,89 @@ const SignUp = () => {
         phoneNo: "",
         password: "",
         location: "",
-
       });
-      // Handle error, like showing an error message
     }
   };
 
-  return <>
-
-
-
-    <div className="container">
-      <h5 className="topics">
-        SignUp
-      </h5>
+  return (
+    <div className="joincontainer">
+      <h5 className="topics">Register as Expert</h5>
       <form onSubmit={handleSubmit} className="htmlForums">
-
-        <div>
-          <label className="labelform" htmlFor="customerName">Name</label>
-          <input className="inputform" type="text"
+        <div className="joinforum">
+          <TextField
+            required
+            label="Name"
             value={customer.customerName}
             onChange={handleInputs}
-            name="customerName" id="name" />
+            name="customerName"
+          />
         </div>
-        <div>
-          <label className="labelform" htmlFor="password">Password</label>
-          <input className="inputform" type="text"
-            value={customer.password}
-            onChange={handleInputs}
-            name="password" id="password" />
 
-        </div>
-        <div>
-          <label className="labelform" htmlFor="phoneno">PhoneNo</label>
-          <input className="inputform" type="text"
+        <div className="joinforum">
+          <TextField
+            required
+            label="PhoneNo"
             value={customer.phoneNo}
             onChange={handleInputs}
-            name="phoneNo" id="phoneNo" />
-
+            name="phoneNo"
+          />
         </div>
-        <div>
-          <label className="labelform" htmlFor="email">Email</label>
-          <input className="inputform" type="text"
+
+        <div className="joinforuml2">
+          <TextField
+            required
+            label="Email"
             value={customer.email}
             onChange={handleInputs}
-            name="email" id="email" />
-
-        </div>
-        <div>
-          <label className="labelform" htmlFor="location">Location</label>
-          <select className="inputform" id="location" name="location"
-            value={customer.location} onChange={handleInputs}>
-            <option value="" disabled>Select Your location</option>
-            <option value="HYDERABAD">Hyderabad</option>
-            <option value="MUMBAI">MUMBAI</option>
-            <option value="GUNTAKAL">Guntakal</option>
-            <option value="CHURU">Churu</option>
-          </select>
+            name="email"
+          />
         </div>
 
+        <div className="joinforuml2">
+          <FormControl sx={{ m: 1, width: "25ch" }} variant="standard">
+            <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+            <Input
+              id="standard-adornment-password"
+              type={showPassword ? "text" : "password"}
+              value={customer.password}
+              onChange={handleInputs}
+              name="password"
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+        </div>
 
+        <Stack spacing={1} sx={{ width: 300 }}>
+        <Autocomplete
+          id="location"
+          options={locations}
+          onChange={(event, newValue) => {
+            setSelectedLocation(newValue); // Update selectedLocation
+          }}
+          value={selectedLocation}
+          renderInput={(params) => (
+            <TextField {...params} label="Location" variant="standard" />
+          )}
+        />
+      </Stack>
 
-
-
-        <br>
-        </br>
-        <button className="button" onClick={handleSubmit} type="submit">SignUp</button>
-
+        <br />
+        <button className="button" onClick={handleSubmit} type="submit">
+          Register
+        </button>
       </form>
-
     </div>
-
-  </>
-
-
-
-
-
+  );
 }
-
 
 export default SignUp;
