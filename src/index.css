@@ -11,7 +11,7 @@ html, body {
   overflow-x: auto;
   overflow-y: auto;
   font-size: 1rem; /* Set a base font size */
-  background-image: linear-gradient(to right top, #e4f6f7, #c9eaf1, #b0ddee, #9acfed, #8cbfec, #82bff0, #76bff4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+  background-image:#D7CFC1;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
