@@ -1,0 +1,24 @@
+/* Add your responsive styling here */
+
+/* Default styles */
+body {
+    font-size: 16px;
+  }
+  
+  /* Responsive styles for tablets */
+  @media only screen and (min-width: 600px) {
+    body {
+      font-size: 18px;
+    }
+  }
+  
+  /* Responsive styles for larger screens (desktop) */
+  @media only screen and (min-width: 1024px) {
+    body {
+      font-size: 20px;
+    }
+    /* Add additional styles for larger screens */
+  }
+  
+  /* Add any other styling specific to UserHome component */
+  
