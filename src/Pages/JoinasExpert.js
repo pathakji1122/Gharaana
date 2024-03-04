@@ -37,7 +37,7 @@ const JoinasExpert = () => {
     // Add more locations as needed
   ];
   const expertise = [
-      "AC_SERVICES"
+      "AC_REPAIRING"
     // Add more locations as needed
   ];
   const [expert, setExpert] = useState({
