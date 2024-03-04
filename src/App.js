@@ -12,9 +12,11 @@ import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import PlaceOrder from "./Pages/PlaceOrder";
 import Offer from "./components/Offer";
+import Logout from "./Pages/Logout";
+import ExpertHome from "./Pages/ExpertHome";
+import ExpertC from "./Pages/ExpertC";
 function App() {
   const [userStage, setUserStage] = useState(0);
-
   useEffect(() => {
     const storedUserStage = localStorage.getItem('userStage');
     if (storedUserStage) {
@@ -26,12 +28,6 @@ function App() {
     setUserStage(newUserStage);
   };
 
-  const handleLogout = () => {
-    Cookies.remove('authToken');
-    localStorage.setItem('userStage', '0');
-    setUserStage(0);
-  };
-
   return (
     <>
       {userStage === 0 && <UserNavbar />}
@@ -39,17 +35,22 @@ function App() {
       {userStage !== 0 && userStage !== 1 && <ExpertNavbar />}
 
       <Routes>
-        <Route
+      <Route
           path="/"
-          element={userStage === 0 ? <UserHome /> : <CustomerHome />}
+          element={
+            userStage === 0 ? <UserHome /> :
+            userStage === 1 ? <CustomerHome /> :
+            userStage === 2 ? <ExpertHome /> : null
+          }
         />
-      
         <Route path="/about" element={<About />} />
         <Route path="/register" element={<JoinasExpert />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/placeorder" element={<PlaceOrder />} />
-        <Route path="/offers" element={<Offer/>} />
+        <Route path="/logout" element={<Logout setUserStage={setUserStage} />} />
+        <Route path="/offers" element={<Offer />} />
+        <Route path="/expertorders" element={<ExpertC />} />
       </Routes>
     </>
   );

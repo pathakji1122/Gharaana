@@ -1,7 +1,14 @@
 import React from "react";
-import { styled, Paper, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { Typography, Paper, TextField, Autocomplete, Grid } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 import bg from "../images/Gray Yellow Illustration Interior And Exterior Magnet (1).png";
+import { debounce } from 'lodash';
 const Intro =()=>{
+  const expertise = [
+    { label: 'Electrician' },
+    // Add more expertise options here as needed
+  ];
+  
 
     return(
 
@@ -69,7 +76,31 @@ const Intro =()=>{
           </div>
         </div>
       </div>
-        
+
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '20px' }}>
+        <Autocomplete
+          id="free-solo-demo"
+          freeSolo
+          options={expertise.map((option) => option.label)}
+          style={{ width: 300 }} // Adjust width as needed
+          PaperComponent={({ children }) => (
+            <Paper elevation={3} style={{ marginTop: '8px', width: 'calc(100% - 20px)', marginLeft: '10px' }}>
+              {children}
+            </Paper>
+          )}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Tell us about your need"
+              variant="outlined"
+            />
+          )}
+        />
+        <div style={{ marginLeft: '10px' }}>
+          <SearchIcon style={{ cursor: 'pointer' }} />
+        </div>
+      </div>
+      
         
         </>
     )

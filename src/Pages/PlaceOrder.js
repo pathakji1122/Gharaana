@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -6,99 +6,114 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
 import axios from "axios";
+import Cookies from "js-cookie";
+import { useLocation } from 'react-router-dom';
 
 const PlaceOrder = (props) => {
-  const data = props.location?.state;
-  const expertise = data?.state?.expertise;
-const price = data?.state?.price;
+  const authToken = Cookies.get('authToken');
+  const location = useLocation();
+  const data = location.state;
+
   const [orderData, setOrderData] = useState({
-    expertise: expertise,
-    price: price,
+    expertise: data.expertise,
+    price: data.price,
     placedForDate: "",
     placedForTime: "",
   });
 
-  const handleOrderDataChange = (event, field) => {
-    const { value } = event.target;
+  const handleOrderDataChange = (event) => {
+    const { name, value } = event.target;
     setOrderData((prevData) => ({
       ...prevData,
-      [field]: value,
+      [name]: value,
     }));
   };
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
+  useEffect(() => {
     setOpen(true);
-  };
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('https://gharaanah.onrender.com/customer/order', orderData);
-      if (response.data.status === true) {
-        window.alert("Order Successful");
-      } else {
-        window.alert("Try again");
+  // Function to handle form submission
+  // Function to handle form submission
+const handleSubmit = async (e) => {
+  e.preventDefault(); // Prevent default form submission behavior
+
+  try {
+    // API call to post the order data
+    const response = await axios.post(
+      'https://gharaanah.onrender.com/customer/placeorder',
+      orderData,
+      {
+        headers: {
+          'Authorization': `Bearer ${authToken}`,
+          'Content-Type': 'application/json', // Adjust content type as needed
+        },
       }
-    } catch (error) {
-      console.error('Error sending data:', error);
-      window.alert("Try again");
+    );
+
+    if (response.data.status === true) {
+      window.alert("Order Successful");
+      handleClose(); // Close the dialog on successful submission
+    } else {
+      window.alert("Order failed. Try again.");
     }
-  };
+  } catch (error) {
+    console.error('Error sending data:', error);
+    window.alert("Network or server error. Try again.");
+  }
+};
+
 
   return (
-    <>
-  
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          component: 'form',
-          onSubmit: handleSubmit,
-        }}
-      >
-        <DialogTitle>Place Order</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Please provide details for your order.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="placedForDate"
-            label="Placed For Date"
-            type="date"
-            fullWidth
-            variant="standard"
-            onChange={(e) => handleOrderDataChange(e, "placedForDate")}
-          />
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="placedForTime"
-            label="Placed For Time"
-            type="time"
-            fullWidth
-            variant="standard"
-            onChange={(e) => handleOrderDataChange(e, "placedForTime")}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Place Order</Button>
-        </DialogActions>
-      </Dialog>
-    </>
+    <Dialog open={open} onClose={handleClose} PaperProps={{ component: 'form', onSubmit: handleSubmit }}>
+      <DialogTitle>Place Order</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          To place your order, please enter the date and time you prefer.
+        </DialogContentText>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="placedForDate"
+          label="Date"
+          type="date"
+          name="placedForDate"
+          fullWidth
+          variant="standard"
+          value={orderData.placedForDate}
+          onChange={handleOrderDataChange}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <TextField
+          margin="dense"
+          id="placedForTime"
+          label="Time"
+          type="time"
+          name="placedForTime"
+          fullWidth
+          variant="standard"
+          value={orderData.placedForTime}
+          onChange={handleOrderDataChange}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button type="submit">Place Order</Button>
+      </DialogActions>
+    </Dialog>
   );
-}
+};
 
 export default PlaceOrder;

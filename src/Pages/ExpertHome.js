@@ -3,7 +3,8 @@ import Intro from "../components/Intro";
 const ExpertHome = ()=>{
     return(
         <>
-        <Intro/>        
+        <Intro/> 
+               
         </>
     )
 }
