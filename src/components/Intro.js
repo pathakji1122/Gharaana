@@ -1,88 +1,63 @@
 import React from "react";
-import { Typography, Paper, TextField, Autocomplete, Grid } from '@mui/material';
+import { Typography, Paper, TextField, Autocomplete } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import bg from "../images/Gray Yellow Illustration Interior And Exterior Magnet (1).png";
-import { debounce } from 'lodash';
-const Intro =()=>{
+
+const Intro = () => {
   const expertise = [
     { label: 'Electrician' },
     // Add more expertise options here as needed
   ];
-  
 
-    return(
-
-
-        <>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '20px' }}>
-        <div style={{ marginRight: '20px', fontWeight: 'bold' }}>
-          <Typography variant="h2" component="div" style={{ fontWeight: 'bold', marginBottom: '20px', color: 'gold', fontFamily: 'Arial' ,fontSize:'100px'}}>
+  return (
+    <>
+      <div style={{ margin: '20px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <Typography variant="h2" style={{ color: 'gold', fontFamily: 'Arial', fontSize: '40px' }}>
             Gharaana
           </Typography>
-          <Typography variant="h4" component="div" style={{ fontWeight: 'bold', marginBottom: '20px',fontSize:'25px' }}>
-                        From Out to In:
-          </Typography>
-          <Typography variant="body1" style={{ textAlign: 'center', marginBottom: '20px' }}>
-            Where your every need finds its way home.
+          <Typography variant="h4" style={{ marginBottom: '20px', fontSize: '25px' }}>
+            From Out to In: Where your every need finds its way home.
           </Typography>
         </div>
-        <Paper elevation={20}>
+        <Paper elevation={20} style={{ width: '100%', borderRadius: '20px' }}>
           <img src={bg} alt="Background" style={{
-            width: '85%',
-            maxHeight: '600px',
+            width: '100%',
             objectFit: 'cover',
             borderRadius: '20px',
           }} />
         </Paper>
       </div>
 
-      <div style={{ color: 'brown', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontSize: '18px', fontFamily: 'Times New Roman, Times, serif' }}>
-        <div style={{ fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>Why Choose
-          <div style={{ fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}> Gharaana?</div>
-        </div>
-        <div style={{ fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>Free, At Home
-          <div style={{ fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>Consultations</div>
-        </div>
-        <div style={{ fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>Reliable
-          <div style={{ fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>Professionals</div>
-        </div>
-        <div style={{ fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>24/7 Availability</div>
-      </div>
+      <div style={{ color: 'brown', textAlign: 'center', fontSize: '18px', fontFamily: 'Times New Roman, Times, serif', margin: '20px', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+  <div style={{ margin: '0 10px', fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>Why Choose Gharaana?</div>
+  <div style={{ margin: '0 10px', fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>Free, At Home Consultations</div>
+  <div style={{ margin: '0 10px', fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>Reliable Professionals</div>
+  <div style={{ margin: '0 10px', fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>24/7 Availability</div>
+</div>
 
-      <div style={{ color: 'black', marginTop: '20px', display: 'flex', justifyContent: 'space-around' }}>
-        <div>We offer easy financing options
-          <div>
-            to help you get the
-            <div> service you need without
-              <div> checking the rate.</div>
-            </div>
-          </div>
+
+      <div style={{ color: 'black', textAlign: 'center', margin: '20px' }}>
+        <div>
+          We offer easy financing options to help you get the service you need without checking the rate.
         </div>
-        <div>Our professionals
-          <div> are happy to come to your
-            <div> home and provide a consultation for free.</div>
-          </div>
+        <div>
+          Our professionals are happy to come to your home and provide a consultation for free.
         </div>
-        <div>Our professionals are
-          <div> licensed and insured to ensure
-            <div> the highest quality of service.</div>
-          </div>
+        <div>
+          Our professionals are licensed and insured to ensure the highest quality of service.
         </div>
-        <div>Need a service provider
-          <div> outside of regular
-            <div> business hours? Gharaana is
-              <div>available to book 24/7.</div>
-            </div>
-          </div>
+        <div>
+          Need a service provider outside of regular business hours? Gharaana is available to book 24/7.
         </div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', margin: '20px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '20px' }}>
         <Autocomplete
           id="free-solo-demo"
           freeSolo
           options={expertise.map((option) => option.label)}
-          style={{ width: 300 }} // Adjust width as needed
+          style={{ width: '100%', maxWidth: '300px' }}
           PaperComponent={({ children }) => (
             <Paper elevation={3} style={{ marginTop: '8px', width: 'calc(100% - 20px)', marginLeft: '10px' }}>
               {children}
@@ -96,13 +71,12 @@ const Intro =()=>{
             />
           )}
         />
-        <div style={{ marginLeft: '10px' }}>
+        <div style={{ marginTop: '10px' }}>
           <SearchIcon style={{ cursor: 'pointer' }} />
         </div>
       </div>
-      
-        
-        </>
-    )
+    </>
+  );
 }
+
 export default Intro;

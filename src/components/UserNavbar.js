@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import Paper from "@mui/material/Paper";
+
 const pages = [
   { label: "Home", path: "/" },
   { label: "About us", path: "/about" },
@@ -33,7 +34,7 @@ const UserNavbar = () => {
   return (
     <>
       <Paper elevation={3}>
-        <AppBar position="static" sx={{ background: "white",borderRadius: "20px" }}>
+        <AppBar position="static" sx={{ background: "white", borderRadius: "20px" }}>
           <Container maxWidth="xl">
             <Toolbar
               disableGutters
@@ -44,21 +45,67 @@ const UserNavbar = () => {
             >
               <Box
                 sx={{
-                  display: { xs: "none", md: "flex" },
+                  display: "flex",
                   alignItems: "center",
                 }}
               >
-                
-                <div
+                <Typography
+                  variant="h6"
                   sx={{
                     fontFamily: "monospace",
                     fontWeight: 700,
                     letterSpacing: ".3rem",
                     textDecoration: "none",
+                    flexGrow: 1,
                   }}
                 >
                   Gharaana
-                </div>
+                </Typography>
+                <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                  <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleOpenNavMenu}
+                    color="inherit"
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorElNav}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
+                    open={Boolean(anchorElNav)}
+                    onClose={handleCloseNavMenu}
+                    sx={{
+                      display: { xs: "block", md: "none" },
+                    }}
+                  >
+                    {pages.map((page) => (
+                      <NavLink
+                        key={page.label}
+                        to={page.path}
+                        style={{
+                          textDecoration: "none",
+                          paddingRight: "20px", // Add more space if needed
+                        }}
+                      >
+                        <MenuItem onClick={handleCloseNavMenu}>
+                          <Typography textAlign="center">{page.label}</Typography>
+                        </MenuItem>
+                      </NavLink>
+                    ))}
+                  </Menu>
+                </Box>
               </Box>
 
               <Box
@@ -84,52 +131,6 @@ const UserNavbar = () => {
                     </Button>
                   </NavLink>
                 ))}
-              </Box>
-
-              <Box sx={{ display: { xs: "flex", md: "none" } }}>
-                <IconButton
-                  size="large"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleOpenNavMenu}
-                  color="inherit"
-                >
-                  <MenuIcon />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorElNav}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "left",
-                  }}
-                  open={Boolean(anchorElNav)}
-                  onClose={handleCloseNavMenu}
-                  sx={{
-                    display: { xs: "block", md: "none" },
-                  }}
-                >
-                  {pages.map((page) => (
-                    <NavLink
-                      key={page.label}
-                      to={page.path}
-                      style={{
-                        textDecoration: "none",
-                        paddingRight: "20px", // Add more space if needed
-                      }}
-                    >
-                      <MenuItem onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">{page.label}</Typography>
-                      </MenuItem>
-                    </NavLink>
-                  ))}
-                </Menu>
               </Box>
             </Toolbar>
           </Container>
