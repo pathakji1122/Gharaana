@@ -15,7 +15,7 @@ import Offer from "./components/Offer";
 import Logout from "./Pages/Logout";
 import ExpertHome from "./Pages/ExpertHome";
 import ExpertC from "./Pages/ExpertC";
-
+import { Navigate } from 'react-router-dom';
 function App() {
   const [userStage, setUserStage] = useState(0);
   useEffect(() => {
@@ -27,23 +27,42 @@ function App() {
       setUserStage(0);
     }
   }, []);
-  
-
   const handleLogin = (newUserStage, token) => {
     setUserStage(newUserStage);
     localStorage.setItem("userStage", newUserStage.toString());
     Cookies.set("userStage", newUserStage.toString(), { expires: 7 }); // set cookie expiration time (in days)
   };
-
+  const handleLogout = () => {
+    setUserStage(0);
+    localStorage.removeItem("userStage");
+    Cookies.remove("userStage");
+  };
+  let userElement = null;
+  if (userStage === 0) {
+    userElement = <UserHome />;
+  } else if (userStage === 1) {
+    userElement = <CustomerHome />;
+  } else if (userStage === 2) {
+    userElement = <ExpertHome />;
+  } else {
+    userElement = <Navigate to="/404" />;
+  }
   return (
     <>
       {userStage === 0 && <UserNavbar />}
       {userStage === 1 && <CustomerNavbar />}
       {userStage !== 0 && userStage !== 1 && <ExpertNavbar />}
-
       <Routes>
         <Route
           path="/"
+          element={
+            userStage === 0 ? <UserHome /> :
+            userStage === 1 ? <CustomerHome /> :
+            userStage === 2 ? <ExpertHome /> : null
+          }
+        />
+         <Route
+          path="/home"
           element={
             userStage === 0 ? <UserHome /> :
             userStage === 1 ? <CustomerHome /> :
@@ -55,12 +74,12 @@ function App() {
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/placeorder" element={<PlaceOrder />} />
-        <Route path="/logout" element={<Logout setUserStage={setUserStage} />} />
+        <Route path="/logout" element={<Logout onLogout={handleLogout} />} />
         <Route path="/offers" element={<Offer />} />
         <Route path="/expertorders" element={<ExpertC />} />
+        <Route path="*" element={<Navigate to="/404" />} />
       </Routes>
     </>
   );
 }
-
 export default App;

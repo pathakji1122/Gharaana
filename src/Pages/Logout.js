@@ -1,19 +1,25 @@
 import React from "react";
 import Cookies from "js-cookie";
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
-const Logout = ({ setUserStage }) => {
+const Logout = ({ onLogout }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Delete the authentication token
-    Cookies.remove('authToken');
+    try {
+      // Delete the authentication token
+      Cookies.remove('authToken');
 
-    // Update the user stage to 0
-    setUserStage(0);
+      // Update the user stage to 0
+      onLogout();
 
-    // Navigate back to the home route
-    navigate('/');
+      // Navigate back to the home route
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed:', error);
+      window.alert("Try Again");
+      // Handle the error or display a message to the user
+    }
   };
 
   return (

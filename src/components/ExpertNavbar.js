@@ -26,27 +26,22 @@ const ExpertNavbar = () => {
 
   return (
     <>
-      <AppBar position="static">
+    
+       <AppBar position="static" sx={{ background: "white", borderRadius: "20px" }}>
         <Toolbar>
-          <AdbIcon sx={{ display: "none", md: "flex", mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component={NavLink}
-            to="#"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
-
+        <Typography
+                  variant="h6"
+                  sx={{
+                    fontFamily: "monospace",
+                    fontWeight: 700,
+                    letterSpacing: ".3rem",
+                    textDecoration: "none",
+                    flexGrow: 1,
+                  }}
+                >
+                  Gharaana
+                </Typography>
+         
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton size="large" aria-label="menu" color="inherit">
               <AdbIcon />

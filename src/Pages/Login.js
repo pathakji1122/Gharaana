@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
-
+import { useNavigate } from 'react-router-dom'; 
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
@@ -16,9 +16,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
 import { ControlPointDuplicateTwoTone, EditNoteSharp, OtherHousesSharp, SpatialTrackingTwoTone } from "@mui/icons-material";
 const Login = ({ onLogin }) => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = React.useState(false);
-  const [selectedLocation, setSelectedLocation] = React.useState(null);
-
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
@@ -50,18 +49,21 @@ const Login = ({ onLogin }) => {
       const response = await axios.post('https://gharaanah.onrender.com/user/login', user);
       if (response.data.status === true) {
         if (response.data.expert === false) {
+
           Cookies.set('authToken', response.data.token,{ expires: 7 });
+          localStorage.setItem('userStage', '1');
           window.alert(`Login Success`)
              
           onLogin(1);
-          localStorage.setItem('userStage', '1');
+         navigate("/");
          
         }
         else if (response.data.expert === true) {
           Cookies.set('authToken', response.data.token, { expires: 7 });
+          localStorage.setItem('userStage', '2');
           window.alert(`Login Done`)
           onLogin(2);
-          localStorage.setItem('userStage', '2');
+          navigate("/") ;  
       
         }
 
