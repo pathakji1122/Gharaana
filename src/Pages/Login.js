@@ -50,7 +50,7 @@ const Login = ({ onLogin }) => {
       const response = await axios.post('https://gharaanah.onrender.com/user/login', user);
       if (response.data.status === true) {
         if (response.data.expert === false) {
-          Cookies.set('authToken', response.data.token, { expires: 7 });
+          Cookies.set('authToken', response.data.token,{ expires: 7 });
           window.alert(`Login Success`)
              
           onLogin(1);
