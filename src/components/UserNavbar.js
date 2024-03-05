@@ -33,7 +33,7 @@ const UserNavbar = () => {
 
   return (
     <>
-      <Paper elevation={3}>
+     
         <AppBar position="static" sx={{ background: "white", borderRadius: "20px" }}>
           <Container maxWidth="xl">
             <Toolbar
@@ -135,7 +135,7 @@ const UserNavbar = () => {
             </Toolbar>
           </Container>
         </AppBar>
-      </Paper>
+     
     </>
   );
 };
