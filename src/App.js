@@ -15,17 +15,24 @@ import Offer from "./components/Offer";
 import Logout from "./Pages/Logout";
 import ExpertHome from "./Pages/ExpertHome";
 import ExpertC from "./Pages/ExpertC";
+
 function App() {
   const [userStage, setUserStage] = useState(0);
   useEffect(() => {
-    const storedUserStage = localStorage.getItem('userStage');
+    const storedUserStage = localStorage.getItem('userStage') || Cookies.get('userStage');
     if (storedUserStage) {
-      setUserStage(parseInt(storedUserStage));
+      setUserStage(parseInt(storedUserStage, 10));
+    } else {
+      // If no userStage is found in localStorage or Cookies, set it to the default value (0 or whatever is appropriate)
+      setUserStage(0);
     }
   }, []);
+  
 
   const handleLogin = (newUserStage, token) => {
     setUserStage(newUserStage);
+    localStorage.setItem("userStage", newUserStage.toString());
+    Cookies.set("userStage", newUserStage.toString(), { expires: 7 }); // set cookie expiration time (in days)
   };
 
   return (
@@ -35,7 +42,7 @@ function App() {
       {userStage !== 0 && userStage !== 1 && <ExpertNavbar />}
 
       <Routes>
-      <Route
+        <Route
           path="/"
           element={
             userStage === 0 ? <UserHome /> :
