@@ -26,54 +26,84 @@ const Intro = () => {
           }} />
         </Paper>
       </div>
+      <div style={{ color: 'brown', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontSize: '18px', fontFamily: 'Times New Roman, Times, serif' }}>
+        <div style={{ fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>Why Choose
+          <div style={{ fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}> Gharaana?</div>
+        </div>
+        <div style={{ fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>Free, At Home
+          <div style={{ fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>Consultations</div>
+        </div>
+        <div style={{ fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>Reliable
+          <div style={{ fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>Professionals</div>
+        </div>
+        <div style={{ fontSize: '24px', fontFamily: 'Times New Roman, Times, serif' }}>24/7 Availability</div>
+      </div>
 
-      <div style={{ textAlign: 'center', margin: '5%', fontFamily: 'Times New Roman, Times, serif' }}>
-        <div style={{ margin: '2% 0', fontSize: '4vw' }}>Why Choose Gharaana?</div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ margin: '5% 0', fontSize: '3.5vw' }}>Free, At Home Consultations</div>
-          <div style={{ margin: '5% 0', fontSize: '3.5vw' }}>Reliable Professionals</div>
-          <div style={{ margin: '5% 0', fontSize: '3.5vw' }}>24/7 Availability</div>
+      <div style={{ color: 'black', marginTop: '20px', display: 'flex', justifyContent: 'space-around' }}>
+        <div>We offer easy financing options
+          <div>
+            to help you get the
+            <div> service you need without
+              <div> checking the rate.</div>
+            </div>
+          </div>
+        </div>
+        <div>Our professionals
+          <div> are happy to come to your
+            <div> home and provide a consultation for free.</div>
+          </div>
+        </div>
+        <div>Our professionals are
+          <div> licensed and insured to ensure
+            <div> the highest quality of service.</div>
+          </div>
+        </div>
+        <div>Need a service provider
+          <div> outside of regular
+            <div> business hours? Gharaana is
+              <div>available to book 24/7.</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div style={{ textAlign: 'center', margin: '5%' }}>
-        <div style={{ fontSize: '3.5vw' }}>
-          We offer easy financing options to help you get the service you need without checking the rate.
-        </div>
-        <div style={{ fontSize: '3.5vw' }}>
-          Our professionals are happy to come to your home and provide a consultation for free.
-        </div>
-        <div style={{ fontSize: '3.5vw' }}>
-          Our professionals are licensed and insured to ensure the highest quality of service.
-        </div>
-        <div style={{ fontSize: '3.5vw' }}>
-          Need a service provider outside of regular business hours? Gharaana is available to book 24/7.
-        </div>
-      </div>
+      
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '5%' }}>
-        <Autocomplete
-          id="free-solo-demo"
-          freeSolo
-          options={expertise.map((option) => option.label)}
-          style={{ width: '90%', maxWidth: '300px' }}
-          PaperComponent={({ children }) => (
-            <Paper elevation={3} style={{ marginTop: '8px', width: 'auto' }}>
-              {children}
-            </Paper>
-          )}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Tell us about your need"
-              variant="outlined"
-            />
-          )}
-        />
-        <div style={{ marginTop: '10px' }}>
-          <SearchIcon style={{ cursor: 'pointer', fontSize: '6vw' }} />
-        </div>
-      </div>
+      <Autocomplete
+        id="free-solo-demo"
+        freeSolo
+        options={expertise.map((option) => option.label)}
+        style={{
+          width: '90%',
+          maxWidth: '2000px',
+          borderRadius: '12px', // Adjust the border radius
+        }}
+        PaperComponent={({ children }) => (
+          <Paper elevation={3} style={{ marginTop: '8px', width: 'auto', borderRadius: '12px' }}>
+            {children}
+          </Paper>
+        )}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Tell us about your need"
+            variant="outlined"
+            style={{
+              borderRadius: '12px', // Adjust the border radius
+              borderTopRightRadius: 0,
+              borderBottomRightRadius: 0,
+            }}
+            InputProps={{
+              style: { borderTopRightRadius: 0, borderBottomRightRadius: 0 },
+              endAdornment: (
+                <SearchIcon style={{ cursor: 'pointer', fontSize: '6vw', marginLeft: '-35px' }} />
+              ),
+            }}
+          />
+        )}
+      />
+    </div>
     </>
   );
 }

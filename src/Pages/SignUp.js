@@ -41,7 +41,6 @@ const SignUp = () => {
     try {
       const response = await axios.post('https://gharaanah.onrender.com/customer/signup', {
         ...customer,
-        location:selectedLocation,
       });
 
       if (response.data.accountCreated === true) {
@@ -103,10 +102,7 @@ const SignUp = () => {
            <InputLabel
             sx={{ color: '#0d2036', fontSize: '14px', fontWeight: '600' }}
             required
-            label="Name"
-            value={customer.customerName}
-            onChange={handleInputs}
-            name="expertName" >
+             >
             Full Name
           </InputLabel>
           <Stack
@@ -138,6 +134,10 @@ const SignUp = () => {
               }}
               type="text"
               placeholder="Enter Full name"
+              label="Name"
+            value={customer.customerName}
+            onChange={handleInputs}
+            name="customerName"
               disableUnderline></Input>
           </Stack>
         </Stack>
@@ -151,10 +151,7 @@ const SignUp = () => {
           <InputLabel
             sx={{ color: '#0d2036', fontSize: '14px', fontWeight: '600' }}
             required
-            label="Email"
-            value={customer.email}
-            onChange={handleInputs}
-            name="email">
+            >
             Email
           </InputLabel>
           <Stack
@@ -186,6 +183,10 @@ const SignUp = () => {
               }}
               type="text"
               placeholder="Enter Phoneno"
+              label="Email"
+            value={customer.email}
+            onChange={handleInputs}
+            name="email"
               disableUnderline></Input>
           </Stack>
         </Stack>
@@ -199,10 +200,7 @@ const SignUp = () => {
           <InputLabel
             sx={{ color: '#0d2036', fontSize: '14px', fontWeight: '600' }}
             required
-            label="Email"
-            value={customer.phoneNo}
-            onChange={handleInputs}
-            name="phoneNo">
+           >
             Phone no
           </InputLabel>
           <Stack
@@ -232,8 +230,12 @@ const SignUp = () => {
                 borderRadius: '4px',
                 outline: 'none',
               }}
-              type="text"
+              type="tel"
               placeholder="Enter Phoneno"
+              label="Email"
+              value={customer.phoneNo}
+              onChange={handleInputs}
+              name="phoneNo"
               disableUnderline></Input>
           </Stack>
         </Stack>
@@ -277,6 +279,10 @@ const SignUp = () => {
               }}
               type="text"
               placeholder="Enter password"
+              label="password"
+            value={customer.password}
+            onChange={handleInputs}
+            name="password"
               disableUnderline></Input>
           </Stack>
         </Stack>
