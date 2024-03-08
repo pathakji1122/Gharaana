@@ -9,7 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useLocation } from 'react-router-dom';
-
+import { Typography } from "@mui/material";
 const PlaceOrder = (props) => {
   const authToken = Cookies.get('authToken');
   const location = useLocation();
@@ -78,6 +78,9 @@ const handleSubmit = async (e) => {
         <DialogContentText>
           To place your order, please enter the date and time you prefer.
         </DialogContentText>
+        <Typography variant="subtitle1">Expertise: {orderData.expertise}</Typography>
+        <Typography variant="subtitle1">Price: {orderData.price}</Typography>
+        
         <TextField
           autoFocus
           margin="dense"
