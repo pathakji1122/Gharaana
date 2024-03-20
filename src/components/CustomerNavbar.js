@@ -28,24 +28,6 @@ const CustomerNavbar = () => {
       <AppBar position="static" sx={{ background: "white", borderRadius: "20px" }}>
         <Toolbar>
           <AdbIcon sx={{ display: "none", md: "flex", mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component={NavLink}
-            to="#"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
            
           </Box>
@@ -57,22 +39,23 @@ const CustomerNavbar = () => {
                     letterSpacing: ".3rem",
                     textDecoration: "none",
                     flexGrow: 1,
+                    color:"black"
                   }}
                 >
                   Gharaana
                 </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button sx={{ my: 2, color: "white" }} component={NavLink} to="/">
+            <Button sx={{ my: 2, color: "black" }} component={NavLink} to="/">
               Home
             </Button>
-            <Button sx={{ my: 2, color: "white" }} component={NavLink} to="/offers">
+            <Button sx={{ my: 2, color: "black" }} component={NavLink} to="/offers">
               Offers
             </Button>
-            <Button sx={{ my: 2, color: "white" }} component={NavLink} to="/book">
+            <Button sx={{ my: 2, color: "black" }} component={NavLink} to="/book">
               Book Experts
             </Button>
-            <Button sx={{ my: 2, color: "white" }} component={NavLink} to="/premium">
+            <Button sx={{ my: 2, color: "black" }} component={NavLink} to="/premium">
               Premium
             </Button>
           </Box>
@@ -98,7 +81,7 @@ const CustomerNavbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleCloseMenu}
             >
-              <MenuItem onClick={handleCloseMenu} component={NavLink} to="/myorders">
+              <MenuItem onClick={handleCloseMenu} component={NavLink} to="/myorder">
                 My Orders
               </MenuItem>
               <MenuItem onClick={handleCloseMenu} component={NavLink} to="/profile">

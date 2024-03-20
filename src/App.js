@@ -16,6 +16,7 @@ import Logout from "./Pages/Logout";
 import ExpertHome from "./Pages/ExpertHome";
 import ExpertC from "./Pages/ExpertC";
 import { Navigate } from 'react-router-dom';
+import Myorder from "./Pages/Myorder";
 function App() {
   const [userStage, setUserStage] = useState(0);
   useEffect(() => {
@@ -77,7 +78,7 @@ function App() {
         <Route path="/logout" element={<Logout onLogout={handleLogout} />} />
         <Route path="/offers" element={<Offer />} />
         <Route path="/expertorders" element={<ExpertC />} />
-        <Route path="*" element={<Navigate to="/404" />} />
+        <Route path="/myorder" element={<Myorder/>}/>
       </Routes>
     </>
   );

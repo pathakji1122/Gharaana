@@ -81,7 +81,7 @@ const ExpertNavbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleCloseMenu}
             >
-              <MenuItem onClick={handleCloseMenu} component={NavLink} to="/myorders">
+              <MenuItem onClick={handleCloseMenu} component={NavLink} to="/">
                 My Orders
               </MenuItem>
               <MenuItem onClick={handleCloseMenu} component={NavLink} to="/profile">

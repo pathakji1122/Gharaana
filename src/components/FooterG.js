@@ -11,7 +11,7 @@ const FooterG = () => {
     <Box
       sx={{
         fontFamily: 'TT Commons, Roboto, sans-serif',
-        backgroundColor: 'white ',
+        backgroundColor: 'grey',
         color: 'black',
         width: '100%',
         maxWidth: '1600px',
