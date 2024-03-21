@@ -182,7 +182,7 @@ const SignUp = () => {
                 outline: 'none',
               }}
               type="text"
-              placeholder="Enter Phoneno"
+              placeholder="Enter Email"
               label="Email"
             value={customer.email}
             onChange={handleInputs}
@@ -232,7 +232,7 @@ const SignUp = () => {
               }}
               type="tel"
               placeholder="Enter Phoneno"
-              label="Email"
+              label="Phoneno"
               value={customer.phoneNo}
               onChange={handleInputs}
               name="phoneNo"
