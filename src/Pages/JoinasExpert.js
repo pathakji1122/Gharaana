@@ -17,22 +17,16 @@ import Stack from "@mui/material/Stack";
 import { Box, Container } from "@mui/system";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { Typography } from "@mui/material";
+import { Typography ,Button} from "@mui/material";
 import { useRef } from "react";
 const JoinasExpert = () => {
-  const [value, setValue] = React.useState(null);
-  const [showPassword, setShowPassword] = React.useState(false);
+ ;
   const [loading, setLoading] = React.useState(false);
   const [registrationError, setRegistrationError] = React.useState(null);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+  const locationInputRef = useRef(null); 
+ 
 
   const locations = [
-  
     "BANGALORE",
   ,
     // Add more locations as needed
@@ -43,7 +37,7 @@ const JoinasExpert = () => {
   ];
   const [selectedLocation, setSelectedLocation] = useState(null);
 const [selectedExpertise, setSelectedExpertise] = useState([]);
-
+const expertiseInputRef = useRef(null); 
   const [expert, setExpert] = useState({
     expertName: "",
     email: "",
@@ -53,29 +47,8 @@ const [selectedExpertise, setSelectedExpertise] = useState([]);
     expertise: [],
   });
 
-  const [selectedDomain, setSelectedDomain] = useState("");
 
-  const handleDomainChange = (event) => {
-    const { value } = event.target;
-    setSelectedDomain(value); // Update selectedDomain state
-  };
 
-  const handleCheckboxChange = (event) => {
-    const { value, checked } = event.target;
-    if (checked) {
-      // If the checkbox is checked, add the value to the expertise list
-      setExpert((prevExpert) => ({
-        ...prevExpert,
-        expertise: [...prevExpert.expertise, value],
-      }));
-    } else {
-      // If the checkbox is unchecked, remove the value from the expertise list
-      setExpert((prevExpert) => ({
-        ...prevExpert,
-        expertise: prevExpert.expertise.filter((item) => item !== value),
-      }));
-    }
-  };
 
   const handleInputs = (e) => {
     const { name, value } = e.target;
@@ -89,32 +62,34 @@ const [selectedExpertise, setSelectedExpertise] = useState([]);
     e.preventDefault();
     setLoading(true);
     setRegistrationError(null);
-
+  
     try {
       const response = await axios.post("https://gharaanah.onrender.com/expert/signup", expert);
-
-      if (response.data.accountCreated === true) {
-        console.log("Data sent successfully:", response.data);
-        window.alert(`Welcome to Gharaana: ${expert.expertName}`);
-        setExpert({
-          expertName: "",
-          email: "",
-          phoneNo: "",
-          password: "",
-          location: " ",
-          expertise: [],
-        });
-        const locationInput = document.querySelector('#location input');
-      const expertiseInput = document.querySelector('#expertise input');
-      
-      locationInput.value = '';
-      expertiseInput.value = '';
-
-      // Dispatch blur event to trigger Autocomplete clearing
-      locationInput.dispatchEvent(new Event('blur'));
-      expertiseInput.dispatchEvent(new Event('blur'));
-      } else if (response.data.accountCreated === false) {
-        setRegistrationError(response.data.response);
+      if (response.status >= 200 && response.status < 300) {
+        // Successful response
+        if (response.data.accountCreated === true) {
+          console.log("Data sent successfully:", response.data);
+          window.alert(`Welcome to Gharaana: ${expert.expertName}`);
+          setExpert({
+            expertName: "",
+            email: "",
+            phoneNo: "",
+            password: "",
+            location: "",
+            expertise: [],
+          });  setSelectedLocation(null); 
+          setSelectedExpertise([]);
+          expertiseInputRef.current.value = "";
+        } else if (response.data.accountCreated === false) {
+          setSelectedLocation(null); 
+          setSelectedExpertise([]);
+          setRegistrationError(response.data.response);
+          locationInputRef.current.value = "";
+          expertiseInputRef.current.value = "";
+        }
+      } else {
+        // Error response
+        throw new Error("Received error response from the server");
       }
     } catch (error) {
       console.error("Error sending data:", error);
@@ -123,23 +98,24 @@ const [selectedExpertise, setSelectedExpertise] = useState([]);
       setLoading(false);
     }
   };
+  
 
   return (
     <>
-    <Card
-      sx={{
-        backgroundColor: 'inherit',
-        width: '100%',
-        padding: '20px',
-        display: 'flex',
-        flexDirection: 'column',
-        rowGap: '10px',
-        alignItems: 'center',
-        border: 'none',
-        maxWidth: '450px',
-      }}>
-      <Typography variant="h2" sx={{ fontFamily: 'system-ui' }}>
-      Become expert for @ Gharaana
+   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Card sx={{
+          backgroundColor: 'inherit',
+          width: '100%',
+          padding: '20px',
+          display: 'flex',
+          flexDirection: 'column',
+          rowGap: '10px',
+          alignItems: 'center',
+          border: 'none',
+          maxWidth: '450px',
+        }}>
+      <Typography variant="h6" sx={{ fontFamily: 'system-ui' }}>
+      Become expert @ Gharaana
     </Typography>
     <Stack sx={{ alignItems: 'center', width: '100%' }} spacing="20px">
     <Stack
@@ -360,19 +336,15 @@ const [selectedExpertise, setSelectedExpertise] = useState([]);
               width="16px"
               height="16px"
             />
-            <Autocomplete
-   
-    freeSolo
-    id="free-solo-2-demo"
+           
+           <Autocomplete
+    disablePortal
+  id="combo-box-demo"
     options={locations}
     sx={{ width: '100%', flex: 1 }}
-    onChange={(event, newValue) => {
-      setExpert((prevExpert) => ({
-        ...prevExpert,
-        location: newValue,
-      }));
-      setSelectedLocation(newValue);
-    }}
+    value={selectedLocation} // Use selectedLocation state instead of expert.location
+        onChange={(event, newValue) => setSelectedLocation(newValue)}
+    
     renderInput={(params) => (
       <TextField
         {...params}
@@ -380,6 +352,8 @@ const [selectedExpertise, setSelectedExpertise] = useState([]);
         variant="standard"
       />
     )}
+
+
    
   />
           </Stack>
@@ -413,19 +387,14 @@ const [selectedExpertise, setSelectedExpertise] = useState([]);
               height="16px"
             />
         <Autocomplete
-   
-    freeSolo
-    id="free-solo-2-demo"
-    sx={{ width: '100%', flex: 1 }}
+     isablePortal
+     id="combo-box-demo"
+    
     options={expertise}
     multiple
-    onChange={(event, newValue) => {
-      setExpert((prevExpert) => ({
-        ...prevExpert,
-        expertise: newValue,
-      }));
-      setSelectedExpertise(newValue);
-    }}
+    sx={{ width: '100%', flex: 1 }}
+    value={selectedExpertise} // Use selectedLocation state instead of expert.location
+        onChange={(event, newValue) => setSelectedExpertise(newValue)}
     renderInput={(params) => (
       <TextField
         {...params}
@@ -439,9 +408,26 @@ const [selectedExpertise, setSelectedExpertise] = useState([]);
           </Stack>
         </Stack>      
                   <br></br>
-                  <button className="button" onClick={handleSubmit} type="submit" disabled={loading}>
-                    {loading ? "Registering..." : "Register"}
-                  </button>
+                  <Button
+          disableElevation
+          variant="contained"
+          sx={{
+            '&:hover': { backgroundColor: '#9ca3af' },
+            gap: '8px',
+            color: 'rgb(255, 255, 255)',
+            textTransform: 'none',
+            fontFamily: 'system-ui',
+            backgroundColor: 'rgb(123, 104, 238)',
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '10px',
+            fontSize: '14px',
+          }}
+          onClick={handleSubmit} type="submit">
+                  {loading ? "Registering..." : "Register"}     
+        </Button>
+                  
       
                   {registrationError && (
                     <p style={{ color: "red" }}>{registrationError}</p>
@@ -450,7 +436,7 @@ const [selectedExpertise, setSelectedExpertise] = useState([]);
                    </Card>
                 
               
-                
+               </div> 
         </>
       );
       };

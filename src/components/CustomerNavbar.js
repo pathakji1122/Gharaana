@@ -25,27 +25,41 @@ const CustomerNavbar = () => {
 
   return (
     <>
-      <AppBar position="static" sx={{ background: "white", borderRadius: "20px" }}>
-        <Toolbar>
-          <AdbIcon sx={{ display: "none", md: "flex", mr: 1 }} />
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-           
+      <AppBar position="fixed" sx={{ background: "white", borderBottom: "none" }}>
+        <Toolbar
+          sx={{
+            justifyContent: "space-between",
+            color: "black", // Set text color to black
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                textDecoration: "none",
+                flexGrow: 1,
+                color: "black",
+              }}
+            >
+              Gharaana
+            </Typography>
           </Box>
-          <Typography
-                  variant="h6"
-                  sx={{
-                    fontFamily: "monospace",
-                    fontWeight: 700,
-                    letterSpacing: ".3rem",
-                    textDecoration: "none",
-                    flexGrow: 1,
-                    color:"black"
-                  }}
-                >
-                  Gharaana
-                </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              justifyContent: "flex-end",
+            }}
+          >
             <Button sx={{ my: 2, color: "black" }} component={NavLink} to="/">
               Home
             </Button>
@@ -60,7 +74,7 @@ const CustomerNavbar = () => {
             </Button>
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenMenu} sx={{ p: 0 }}>
                 <Avatar alt="User Avatar" src="/static/images/avatar.jpg" />
@@ -94,6 +108,9 @@ const CustomerNavbar = () => {
           </Box>
         </Toolbar>
       </AppBar>
+      <div style={{ marginTop: "64px" }}> {/* Adjust margin top to avoid overlap with navbar */}
+        {/* Your component content here */}
+      </div>
     </>
   );
 };

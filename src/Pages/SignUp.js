@@ -9,16 +9,10 @@ import Stack from "@mui/material/Stack";
 import Card from "@mui/material/Card";
 import { Typography } from '@mui/material';
 import Button from "@mui/material/Button";
+import { useRef } from "react";
 const SignUp = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [selectedLocation, setSelectedLocation] = React.useState(null);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const locationInputRef = useRef(null); 
   const locations = [
     'BANGALORE'
   ];
@@ -53,6 +47,8 @@ const SignUp = () => {
           location: "",
         });
         window.alert(`Welcome to Gharaana: ${customer.customerName}`);
+        setSelectedLocation(null); 
+        locationInputRef.current.value = "";
       } else if (response.data.accountCreated === false) {
         setCustomer({
           customerName: "",
@@ -60,7 +56,8 @@ const SignUp = () => {
           phoneNo: "",
           password: "",
           location: "",
-        });
+        }); setSelectedLocation(null); 
+        locationInputRef.current.value = "";
         window.alert(`Error: ${response.data.response}`);
       }
     } catch (error) {
@@ -76,20 +73,20 @@ const SignUp = () => {
   };
   return (
  <>
-  <Card
-      sx={{
-        backgroundColor: 'inherit',
-        width: '100%',
-        padding: '20px',
-        display: 'flex',
-        flexDirection: 'column',
-        rowGap: '10px',
-        alignItems: 'center',
-        border: 'none',
-        maxWidth: '450px',
-      }}>
+  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Card sx={{
+          backgroundColor: 'inherit',
+          width: '100%',
+          padding: '20px',
+          display: 'flex',
+          flexDirection: 'column',
+          rowGap: '10px',
+          alignItems: 'center',
+          border: 'none',
+          maxWidth: '450px',
+        }}>
             <Typography variant="h5" sx={{ fontFamily: 'system-ui' }}>
-        SignUp For Gharaana
+        SignUp 
       </Typography>
       <Stack sx={{ alignItems: 'center', width: '100%' }} spacing="20px">
       <Stack
@@ -182,7 +179,7 @@ const SignUp = () => {
                 outline: 'none',
               }}
               type="text"
-              placeholder="Enter Phoneno"
+              placeholder="Enter Email"
               label="Email"
             value={customer.email}
             onChange={handleInputs}
@@ -232,7 +229,7 @@ const SignUp = () => {
               }}
               type="tel"
               placeholder="Enter Phoneno"
-              label="Email"
+              label="Phoneno"
               value={customer.phoneNo}
               onChange={handleInputs}
               name="phoneNo"
@@ -317,15 +314,13 @@ const SignUp = () => {
     height="16px"
   />
   <Autocomplete
-    id="location"
-    options={locations}
-    sx={{ width: '100%', flex: 1 }} // Ensure it expands fully
-    onChange={(event, newValue) => {
-      setCustomer((prevCustomer) => ({
-        ...prevCustomer,
-        location: newValue,
-      }));
-    }}
+      disablePortal
+      id="combo-box-demo"
+        options={locations}
+        sx={{ width: '100%', flex: 1 }}
+        value={selectedLocation} // Use selectedLocation state instead of expert.location
+            onChange={(event, newValue) => setSelectedLocation(newValue)}
+        
     renderInput={(params) => (
       <TextField
         {...params}
@@ -371,6 +366,7 @@ const SignUp = () => {
       
             
             </Card>   
+            </div>
         </>
  
   

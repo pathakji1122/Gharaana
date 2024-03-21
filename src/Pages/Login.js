@@ -83,7 +83,8 @@ const Login = ({ onLogin }) => {
     sx={{
       fontFamily: 'Segoe UI,sans-serif,system-ui',
       backgroundColor: 'rgb(255,255,255)',
-      width: '100%',
+      marginTop:5,
+      width: '25%',
       maxWidth: '450px',
     }}>
     <Stack

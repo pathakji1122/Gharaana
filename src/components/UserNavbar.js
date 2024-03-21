@@ -10,7 +10,6 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
-import Paper from "@mui/material/Paper";
 
 const pages = [
   { label: "Home", path: "/" },
@@ -33,109 +32,112 @@ const UserNavbar = () => {
 
   return (
     <>
-     
-        <AppBar position="static" sx={{ background: "white", borderRadius: "20px" }}>
-          <Container maxWidth="xl">
-            <Toolbar
-              disableGutters
+      <AppBar position="fixed" sx={{ background: "white", boxShadow: "none" }}>
+        <Container maxWidth="xl">
+          <Toolbar
+            disableGutters
+            sx={{
+              justifyContent: "space-between",
+              color: "black", // Set text color to black
+            }}
+          >
+            <Box
               sx={{
-                justifyContent: "space-between",
-                color: "black", // Set text color to black
+                display: "flex",
+                alignItems: "center",
               }}
             >
-              <Box
+              <Typography
+                variant="h6"
                 sx={{
-                  display: "flex",
-                  alignItems: "center",
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  textDecoration: "none",
+                  flexGrow: 1,
+                  color: "black",
                 }}
               >
-                <Typography
-                  variant="h6"
+                Gharaana
+              </Typography>
+              <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  color="inherit"
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
                   sx={{
-                    fontFamily: "monospace",
-                    fontWeight: 700,
-                    letterSpacing: ".3rem",
-                    textDecoration: "none",
-                    flexGrow: 1,
+                    display: { xs: "block", md: "none" },
                   }}
                 >
-                  Gharaana
-                </Typography>
-                <Box sx={{ display: { xs: "flex", md: "none" } }}>
-                  <IconButton
-                    size="large"
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={handleOpenNavMenu}
-                    color="inherit"
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                  <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorElNav}
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "left",
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
-                    }}
-                    open={Boolean(anchorElNav)}
-                    onClose={handleCloseNavMenu}
-                    sx={{
-                      display: { xs: "block", md: "none" },
-                    }}
-                  >
-                    {pages.map((page) => (
-                      <NavLink
-                        key={page.label}
-                        to={page.path}
-                        style={{
-                          textDecoration: "none",
-                          paddingRight: "20px", // Add more space if needed
-                        }}
-                      >
-                        <MenuItem onClick={handleCloseNavMenu}>
-                          <Typography textAlign="center">{page.label}</Typography>
-                        </MenuItem>
-                      </NavLink>
-                    ))}
-                  </Menu>
-                </Box>
-              </Box>
-
-              <Box
-                sx={{
-                  flexGrow: 1,
-                  display: { xs: "none", md: "flex" },
-                  justifyContent: "flex-end",
-                }}
-              >
-                {pages.map((page) => (
-                  <NavLink
-                    key={page.label}
-                    to={page.path}
-                    style={{
-                      textDecoration: "none",
-                      marginRight: "20px", // Add more space if needed
-                    }}
-                  >
-                    <Button
-                      sx={{ color: "black" }} // Set text color to black
+                  {pages.map((page) => (
+                    <NavLink
+                      key={page.label}
+                      to={page.path}
+                      style={{
+                        textDecoration: "none",
+                        paddingRight: "20px", // Add more space if needed
+                        color: "black", // Set text color to black
+                      }}
                     >
-                      {page.label}
-                    </Button>
-                  </NavLink>
-                ))}
+                      <MenuItem onClick={handleCloseNavMenu}>
+                        <Typography textAlign="center">{page.label}</Typography>
+                      </MenuItem>
+                    </NavLink>
+                  ))}
+                </Menu>
               </Box>
-            </Toolbar>
-          </Container>
-        </AppBar>
-     
+            </Box>
+
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+                justifyContent: "flex-end",
+              }}
+            >
+              {pages.map((page) => (
+                <NavLink
+                  key={page.label}
+                  to={page.path}
+                  style={{
+                    textDecoration: "none",
+                    marginRight: "20px", // Add more space if needed
+                  }}
+                >
+                  <Button
+                    sx={{ color: "black" }} // Set text color to black
+                  >
+                    {page.label}
+                  </Button>
+                </NavLink>
+              ))}
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <div style={{ marginTop: "64px" }}> {/* Adjust margin top to avoid overlap with navbar */}
+        {/* Your component content here */}
+      </div>
     </>
   );
 };
