@@ -1,4 +1,5 @@
-import React, { useEffect ,useState} from "react";
+import React from "react";
+import { useState } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from React Router
 import Button from '@mui/material/Button';
@@ -12,49 +13,44 @@ import axios from "axios";
 import { Typography } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-const AcceptOrder = ({ orderId }) => {
-  const navigate = useNavigate(); // Get the navigate function
-  const [open, setOpen] = useState(false);
-  const handleClose = () => {
-    navigate('/');
-    setOpen(false);
-     // Navigate to the home page
-  };
-  useEffect(() => {
-    const acceptOrderUrl = async () => {
-      const order={
-        orderId:orderId
-      }
-      try {
-        const authToken = Cookies.get("authToken");
-        const response = await axios.post(
-          'https://gharaanah.onrender.com/expert/acceptorder',
-          order,
-          {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-              'Content-Type': 'application/json', // Make sure to set Content-Type for JSON payload
-            },
-          }
-        );
-        setOpen(true);
-        console.log("Order accepted successfully", response.data);
-      } catch (error) {
-        console.error('Error accepting order:', error);
-        // Optionally, handle errors (e.g., displaying an error message to the user)
-      }
+const StartOrder=(orderId)=>{
+    const navigate = useNavigate();
+    const [open, setOpen] = useState(true);
+    const handleClose = () => {
+      navigate('/');
+      setOpen(false);
     };
-    acceptOrderUrl();
 
-    
-  },[orderId, navigate]); // Ensure useEffect reacts to changes in orderid and navigate
+    const startorder = async (orderId) => {
+       
+        try {
+          const authToken = Cookies.get("authToken");
+          const response = await axios.post(
+            "https://gharaanah.onrender.com/expert/startorder",
+            orderId,
+            {
+              headers: {
+                Authorization: `Bearer ${authToken}`,
+              },
+            }
+          );
+          setOpen(false);
+          navigate('/');
 
-  return (
-    <>
-    <div style={{ pointerEvents: 'auto' }}>
+         
+        } catch (error) {
+          console.error("Error fetching orders:", error);
+        }
+      };
+
+
+    return(
+        <>
+         <div style={{ pointerEvents: 'auto' }}>
         
         <Dialog open={open} PaperProps={{  }}>
         <DialogTitle>
+        
           <IconButton
             aria-label="close"
             onClick={handleClose}
@@ -78,15 +74,20 @@ const AcceptOrder = ({ orderId }) => {
             }}
           >
             
-          Accepted
+          Start Order
+
           </Typography>
+          <Button  onClick={() => startorder(orderId)} >
+            Start 
+          </Button>
           
         </DialogContent>
       </Dialog>
           
       </div>
-    </>
-  );
-};
-
-export default AcceptOrder;
+        
+        
+        </>
+    )
+}
+export default StartOrder;

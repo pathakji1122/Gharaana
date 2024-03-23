@@ -8,22 +8,25 @@ import { Button, CardActions, Grid, IconButton } from '@mui/material';
 import { Divider } from '@mui/material';
 import { Stepper, Step, StepLabel } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-
+import Otp from '../components/Otp';
 const Myorder = () => {
-  const getOrderStatusLabel = (status) => {
-    switch (status) {
-      case "NOT_ACCEPTED":
-        return "Placed";
-      case "ACCEPTED":
-        return "Accepted";
-      case "IN_PROGRESS":
-        return "Started";
-      case "COMPLETED":
-        return "Completed";
-      default:
-        return "Placed";
-    }
-  };
+  const[getOtpOrderId,setGetOtpOrderId]=useState(null);
+  
+const steps = ['Placed', 'Accepted', 'Started','Completed'];
+const getStep = (orderStatus) => {
+  switch (orderStatus) {
+    case 'NOT_ACCEPTED':
+      return 0;
+    case 'ACCEPTED':
+      return 1;
+    case 'IN_PROGRESS':
+      return 2;
+    case 'COMPLETED':
+      return 3;
+    default:
+      return 0;
+  }
+};
   const [orders, setOrders] = useState([]);
   const [paymentId, setPaymentId] = useState();
 
@@ -97,6 +100,9 @@ const Myorder = () => {
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
+  const GetOtp = (orderId) => {
+    setGetOtpOrderId(orderId);
+  };
 
   return (
     <Grid container spacing={2} justifyContent="center">
@@ -114,42 +120,53 @@ const Myorder = () => {
               <Typography variant="body2" color="text.secondary">
                 {order.expertise}
               </Typography>
-              <Stepper alternativeLabel>
-                <Step>
-                  <StepLabel>{getOrderStatusLabel(order.status)}</StepLabel>
-                </Step>
-                <Step>
-                  <StepLabel>Accepted</StepLabel>
-                </Step>
-                <Step>
-                  <StepLabel>Started</StepLabel>
-                </Step>
-                <Step>
-                  <StepLabel>Completed</StepLabel>
-                </Step>
+              <Stepper activeStep={getStep(order.orderStatus)} alternativeLabel>
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
               </Stepper>
               <Typography variant="body2" color="text.secondary">
                 Total Amount: {order.price}
               </Typography>
             </CardContent>
             <div style={{ backgroundColor: '#f5f5f5' }}>
-              {!order.payment && (
-                <CardActions sx={{ justifyContent: 'flex-end' }}>
-                  <Button
-                    size="small"
-                    color="primary"
-                    variant="contained"
-                    onClick={() => initiatePayment(order.orderId, order)}
-                  >
-                    Pay now
-                  </Button>
-                </CardActions>
-              )}
-            </div>
+  {!order.payment && (
+    <CardActions sx={{ justifyContent: 'space-between' }}> {/* Change justifyContent to 'space-between' */}
+      <Button
+        size="small"
+        color="primary"
+        variant="contained"
+        onClick={() => initiatePayment(order.orderId, order)}
+      >
+        Pay now
+      </Button>
+      {/* Move the OTP button inside the same CardActions component */}
+      {order.orderStatus === 'IN_PROGRESS' && (
+        <Button
+          size="small"
+          color="primary"
+          variant="contained"
+         onClick={()=>GetOtp(order.orderId)}
+        >
+          Generate OTP
+        </Button>
+      )}
+    </CardActions>
+  )}
+    
+</div>
+
+           
           </Card>
+          
         </Grid>
+        
       ))}
+      {getOtpOrderId && <Otp orderId={getOtpOrderId} />}
     </Grid>
+    
   );
 };
 

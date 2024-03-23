@@ -49,13 +49,13 @@ const ExpertNavbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button sx={{ my: 2, color: "white" }} component={NavLink} to="/">
+            <Button sx={{ my: 2, color: "black" }} component={NavLink} to="/">
               Home
             </Button>
-            <Button sx={{ my: 2, color: "white" }} component={NavLink} to="/offers">
+            <Button sx={{ my: 2, color: "black" }} component={NavLink} to="/offers">
               Post Ad
             </Button>
-            <Button sx={{ my: 2, color: "white" }} component={NavLink} to="/expertorders">
+            <Button sx={{ my: 2, color: "black" }} component={NavLink} to="/expertorders">
               Orders For You
             </Button>
           </Box>
@@ -81,7 +81,7 @@ const ExpertNavbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleCloseMenu}
             >
-              <MenuItem onClick={handleCloseMenu} component={NavLink} to="/">
+              <MenuItem onClick={handleCloseMenu} component={NavLink} to="/expertsaccepted">
                 My Orders
               </MenuItem>
               <MenuItem onClick={handleCloseMenu} component={NavLink} to="/profile">

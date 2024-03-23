@@ -9,9 +9,9 @@ const Intro = () => {
 
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", flexDirection: theme.breakpoints.down('sm') ? 'column' : 'row' }}>
-        <Paper elevation={20} style={{ borderRadius: "20px", overflow: "hidden", marginRight: theme.breakpoints.down('sm') ? 0 : "5%", marginBottom: theme.breakpoints.down('sm') ? '20px' : 0 }}>
-          <img src={home} alt="Background" style={{ width: "600px", height: "auto", objectFit: "cover" }} />
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "150vh", flexDirection: theme.breakpoints.down('sm') ? 'column' : 'row' }}>
+        <Paper elevation={20} style={{ borderRadius: "20px", overflow: "hidden", marginRight: theme.breakpoints.down('sm') ? 0 : "5%", marginBottom: theme.breakpoints.down('sm') ? '10px' : 0 }}>
+          <img src={home} alt="Background" style={{ width: "400px", height: "100%", objectFit: "cover" }} />
         </Paper>
         <div style={{ flex: 1, textAlign: "center" }}>
           <Typography variant="h4" style={{ color: "gold", fontFamily: "Arial", fontSize: "5vw", margin: "0 5%" }}>

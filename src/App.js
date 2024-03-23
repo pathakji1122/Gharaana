@@ -17,6 +17,7 @@ import ExpertHome from "./Pages/ExpertHome";
 import ExpertC from "./Pages/ExpertC";
 import { Navigate } from 'react-router-dom';
 import Myorder from "./Pages/Myorder";
+import ExpertsOrders from "./Pages/ExpertsOrders";
 function App() {
   const [userStage, setUserStage] = useState(0);
   useEffect(() => {
@@ -70,15 +71,19 @@ function App() {
             userStage === 2 ? <ExpertHome /> : null
           }
         />
+        <Route path="/" element={<UserHome />} />
+        <Route path="/home" element={<UserHome />} />
         <Route path="/about" element={<About />} />
-        <Route path="/register" element={<JoinasExpert />} />
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/placeorder" element={<PlaceOrder />} />
-        <Route path="/logout" element={<Logout onLogout={handleLogout} />} />
-        <Route path="/offers" element={<Offer />} />
-        <Route path="/expertorders" element={<ExpertC />} />
-        <Route path="/myorder" element={<Myorder/>}/>
+        <Route path="/register" element={userStage === 0 ? <JoinasExpert /> : <Navigate to="/" />} />
+        <Route path="/login" element={userStage === 0 ? <Login onLogin={handleLogin} /> : <Navigate to="/" />} />
+        <Route path="/signup" element={userStage === 0 ? <SignUp /> : <Navigate to="/" />} />
+        <Route path="/placeorder" element={userStage === 1 ? <PlaceOrder /> : <Navigate to="/" />} />
+        <Route path="/logout" element={userStage !== 0 ? <Logout onLogout={handleLogout}/> :<Navigate to="/" />} />
+        <Route path="/offers" element={userStage !== 0 ? <Offer /> : <Navigate to="/" />} />
+        <Route path="/expertorders" element={userStage === 2 ? <ExpertC /> : <Navigate to="/" />} />
+        <Route path="/myorder" element={userStage === 1 ? <Myorder /> : <Navigate to="/" />} />
+        <Route path="/expertsaccepted" element={userStage === 2 ? <ExpertsOrders /> : <Navigate to="/" />} />
+        
       </Routes>
     </>
   );

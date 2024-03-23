@@ -14,7 +14,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 const pages = [
   { label: "Home", path: "/" },
   { label: "About us", path: "/about" },
-  { label: "Join@Expert", path: "/register" },
+  { label: "Become an Expert", path: "/register" },
   { label: "SignUp", path: "/signup" },
   { label: "Login", path: "/login" },
 ];
@@ -32,7 +32,7 @@ const UserNavbar = () => {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ background: "white", boxShadow: "none" }}>
+      <AppBar position="fixed" sx={{ background: "rgba(255, 255, 255, 0.1)", boxShadow: "none", }}>
         <Container maxWidth="xl">
           <Toolbar
             disableGutters
@@ -135,9 +135,7 @@ const UserNavbar = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      <div style={{ marginTop: "64px" }}> {/* Adjust margin top to avoid overlap with navbar */}
-        {/* Your component content here */}
-      </div>
+      
     </>
   );
 };

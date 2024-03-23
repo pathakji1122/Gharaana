@@ -13,6 +13,9 @@ import { useRef } from "react";
 const SignUp = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const locationInputRef = useRef(null); 
+  const [loading, setLoading] = React.useState(false);
+  const [registrationSuccess, setRegistrationSuccess] = useState(null);
+  const [registrationError, setRegistrationError] = React.useState(null);
   const locations = [
     'BANGALORE'
   ];
@@ -31,11 +34,18 @@ const SignUp = () => {
     }));
   };
   const handleSubmit = async (e) => {
+    setLoading(true);
+    setRegistrationError(null);
     e.preventDefault();
     try {
-      const response = await axios.post('https://gharaanah.onrender.com/customer/signup', {
+      const customerData = {
         ...customer,
-      });
+        location: selectedLocation,
+        
+      };
+      const response = await axios.post('https://gharaanah.onrender.com/customer/signup', 
+        customerData
+      );
 
       if (response.data.accountCreated === true) {
         console.log('Data sent successfully:', response.data);
@@ -46,19 +56,15 @@ const SignUp = () => {
           password: "",
           location: "",
         });
-        window.alert(`Welcome to Gharaana: ${customer.customerName}`);
+        
         setSelectedLocation(null); 
         locationInputRef.current.value = "";
+        setRegistrationSuccess(response.data.response);
+
       } else if (response.data.accountCreated === false) {
-        setCustomer({
-          customerName: "",
-          email: "",
-          phoneNo: "",
-          password: "",
-          location: "",
-        }); setSelectedLocation(null); 
+         setSelectedLocation(null); 
         locationInputRef.current.value = "";
-        window.alert(`Error: ${response.data.response}`);
+        setRegistrationError(response.data.response);
       }
     } catch (error) {
       console.error('Error sending data:', error);
@@ -69,6 +75,10 @@ const SignUp = () => {
         password: "",
         location: "",
       });
+      
+    }
+    finally {
+      setLoading(false);
     }
   };
   return (
@@ -313,27 +323,28 @@ const SignUp = () => {
     width="16px"
     height="16px"
   />
-  <Autocomplete
-      disablePortal
-      id="combo-box-demo"
-        options={locations}
-        sx={{ width: '100%', flex: 1 }}
-        value={selectedLocation} // Use selectedLocation state instead of expert.location
-            onChange={(event, newValue) => setSelectedLocation(newValue)}
-        
-    renderInput={(params) => (
-      <TextField
-        {...params}
-        label=""
-        variant="standard"
-        InputProps={{ ...params.InputProps, disableUnderline: true }} 
-        sx={{ width: '100%' }} 
-      />
-    )}
+    <Autocomplete
+            ref={locationInputRef}
+  disablePortal
+  id="combo-box-demo"
+  options={locations}
+  sx={{ width: '100%', flex: 1 }}
+  value={selectedLocation}
+  onChange={(event, newValue) => setSelectedLocation(newValue)}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      label=""
+      variant="standard"
+    />
+  )}
   />
 </Stack>
       </Stack>   
         </Stack>
+        <br></br>
+                  {registrationSuccess && <Typography variant="body1" sx={{ color: "green", textAlign: "center" }}>{registrationSuccess}</Typography>}
+          {registrationError && <Typography variant="body1" sx={{ color: "red", textAlign: "center" }}>{registrationError}</Typography>}
         <Button
           disableElevation
           variant="contained"
@@ -351,7 +362,7 @@ const SignUp = () => {
             fontSize: '14px',
           }}
           onClick={handleSubmit} type="submit">
-                      Join
+                      {loading ? "Signingup..." : "Signup"}    
         </Button>
 
           

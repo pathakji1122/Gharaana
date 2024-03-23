@@ -85,7 +85,7 @@ const PlaceOrder = (props) => {
     <>
 
       <div style={{ pointerEvents: 'auto' }}>
-        {/* This part will be clickable */}
+        
         <Dialog open={open} PaperProps={{ component: 'form', onSubmit: handleSubmit }}>
         <DialogTitle>
           Place Order

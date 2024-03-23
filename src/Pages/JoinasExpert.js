@@ -17,38 +17,30 @@ import Stack from "@mui/material/Stack";
 import { Box, Container } from "@mui/system";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { Typography ,Button} from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import { useRef } from "react";
+import { basePlacements } from "@popperjs/core";
+
 const JoinasExpert = () => {
- ;
   const [loading, setLoading] = React.useState(false);
   const [registrationError, setRegistrationError] = React.useState(null);
-  const locationInputRef = useRef(null); 
- 
+  const locationInputRef = useRef(null);
 
-  const locations = [
-    "BANGALORE",
-  ,
-    // Add more locations as needed
-  ];
-  const expertise = [
-      "AC_REPAIRING"
-    // Add more locations as needed
-  ];
+  const locations = ["BANGALORE"];
+  const expertise = ["AC_REPAIRING"];
+  const [registrationSuccess, setRegistrationSuccess] = useState(null);
+
   const [selectedLocation, setSelectedLocation] = useState(null);
-const [selectedExpertise, setSelectedExpertise] = useState([]);
-const expertiseInputRef = useRef(null); 
+  const [selectedExpertise, setSelectedExpertise] = useState([]);
+  const expertiseInputRef = useRef(null);
   const [expert, setExpert] = useState({
     expertName: "",
     email: "",
     phoneNo: "",
     password: "",
-    location: "",
+    location: "", // Add location to the expert state
     expertise: [],
   });
-
-
-
 
   const handleInputs = (e) => {
     const { name, value } = e.target;
@@ -62,14 +54,22 @@ const expertiseInputRef = useRef(null);
     e.preventDefault();
     setLoading(true);
     setRegistrationError(null);
-  
+
     try {
-      const response = await axios.post("https://gharaanah.onrender.com/expert/signup", expert);
-      if (response.status >= 200 && response.status < 300) {
-        // Successful response
+      // Update expert object with selected location
+      const expertData = {
+        ...expert,
+        location: selectedLocation,
+        expertise: selectedExpertise,
+      };
+      
+      const response = await axios.post(
+        "https://gharaanah.onrender.com/expert/signup",
+        expertData
+      );
+     
         if (response.data.accountCreated === true) {
           console.log("Data sent successfully:", response.data);
-          window.alert(`Welcome to Gharaana: ${expert.expertName}`);
           setExpert({
             expertName: "",
             email: "",
@@ -77,32 +77,42 @@ const expertiseInputRef = useRef(null);
             password: "",
             location: "",
             expertise: [],
-          });  setSelectedLocation(null); 
+          });
+          setSelectedLocation(null);
           setSelectedExpertise([]);
-          expertiseInputRef.current.value = "";
-        } else if (response.data.accountCreated === false) {
-          setSelectedLocation(null); 
-          setSelectedExpertise([]);
-          setRegistrationError(response.data.response);
           locationInputRef.current.value = "";
           expertiseInputRef.current.value = "";
+          setRegistrationSuccess(response.data.response); // Set success message
+        } else if (response.data.accountCreated === false) {
+          console.log(response.data.response);
+        
+          setSelectedLocation(null);
+          setSelectedExpertise([]);
+          locationInputRef.current.value = "";
+          expertiseInputRef.current.value = "";
+          setRegistrationError(response.data.response);
         }
-      } else {
-        // Error response
-        throw new Error("Received error response from the server");
-      }
+       
     } catch (error) {
+      setExpert({
+        expertName: "",
+        email: "",
+        phoneNo: "",
+        password: "",
+        location: "",
+        expertise: [],
+      });
       console.error("Error sending data:", error);
       setRegistrationError("An error occurred during registration. Please try again.");
     } finally {
       setLoading(false);
     }
   };
-  
 
+ 
   return (
     <>
-   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh',marginTop:110,border:"black" }}>
         <Card sx={{
           backgroundColor: 'inherit',
           width: '100%',
@@ -115,7 +125,7 @@ const expertiseInputRef = useRef(null);
           maxWidth: '450px',
         }}>
       <Typography variant="h6" sx={{ fontFamily: 'system-ui' }}>
-      Become expert @ Gharaana
+      Become an expert
     </Typography>
     <Stack sx={{ alignItems: 'center', width: '100%' }} spacing="20px">
     <Stack
@@ -270,7 +280,7 @@ const expertiseInputRef = useRef(null);
           spacing="10px">
           <InputLabel
             sx={{ color: '#0d2036', fontSize: '14px', fontWeight: '600' }}>
-            Choose Password
+            Enter Password
           </InputLabel>
           <Stack
             sx={{
@@ -338,20 +348,20 @@ const expertiseInputRef = useRef(null);
             />
            
            <Autocomplete
-    disablePortal
+            ref={locationInputRef}
+  disablePortal
   id="combo-box-demo"
-    options={locations}
-    sx={{ width: '100%', flex: 1 }}
-    value={selectedLocation} // Use selectedLocation state instead of expert.location
-        onChange={(event, newValue) => setSelectedLocation(newValue)}
-    
-    renderInput={(params) => (
-      <TextField
-        {...params}
-        label=""
-        variant="standard"
-      />
-    )}
+  options={locations}
+  sx={{ width: '100%', flex: 1 }}
+  value={selectedLocation}
+  onChange={(event, newValue) => setSelectedLocation(newValue)}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      label=""
+      variant="standard"
+    />
+  )}
 
 
    
@@ -387,27 +397,30 @@ const expertiseInputRef = useRef(null);
               height="16px"
             />
         <Autocomplete
-     isablePortal
+         ref={expertiseInputRef}
+     disablePortal
      id="combo-box-demo"
-    
-    options={expertise}
-    multiple
-    sx={{ width: '100%', flex: 1 }}
-    value={selectedExpertise} // Use selectedLocation state instead of expert.location
-        onChange={(event, newValue) => setSelectedExpertise(newValue)}
-    renderInput={(params) => (
-      <TextField
-        {...params}
-        label=""
-        variant="standard"
-      />
-    )}
+     options={expertise}
+     multiple
+     sx={{ width: '100%', flex: 1 }}
+     value={selectedExpertise}
+     onChange={(event, newValue) => setSelectedExpertise(newValue)}
+     renderInput={(params) => (
+       <TextField
+         {...params}
+         label=""
+         variant="standard"
+       />
+     )}
    
   />
             
           </Stack>
         </Stack>      
                   <br></br>
+                  {registrationSuccess && <Typography variant="body1" sx={{ color: "green", textAlign: "center" }}>{registrationSuccess}</Typography>}
+          {registrationError && <Typography variant="body1" sx={{ color: "red", textAlign: "center" }}>{registrationError}</Typography>}
+        </Stack>
                   <Button
           disableElevation
           variant="contained"
@@ -429,13 +442,11 @@ const expertiseInputRef = useRef(null);
         </Button>
                   
       
-                  {registrationError && (
-                    <p style={{ color: "red" }}>{registrationError}</p>
-                  )}
-                  </Stack>
-                   </Card>
+                 
+                 
+                 
                 
-              
+              </Card>
                </div> 
         </>
       );

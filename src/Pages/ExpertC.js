@@ -11,7 +11,7 @@ const ExpertC = () => {
   const authToken = Cookies.get('authToken');
   const [orders, setOrders] = useState([]);
   const [acceptingOrderId, setAcceptingOrderId] = useState(null); // New state to track order being accepted
-  
+  const [showPopup, setShowPopup] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,37 +31,55 @@ const ExpertC = () => {
     };
     fetchData();
   }, [authToken]);
-  
+
   const handleAcceptOrder = (orderId) => {
-    // Set the ID of the order being accepted
     setAcceptingOrderId(orderId);
   };
-
   return (
     <div>
       {orders.map(order => (
-        <Card key={order.orderId} sx={{ maxWidth: 345, margin: 2 }}>
-          <CardActionArea>
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Order ID: {order.orderId}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Service: {order.expertise}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Order Price: {order.price}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button size="small" color="primary" onClick={() => handleAcceptOrder(order.orderId)}>
-              Accept
-            </Button>
-          </CardActions>
-        </Card>
+     
+<Card key={order.orderId} sx={{ maxWidth: 500, margin: 2, borderRadius: 4, boxShadow: 3 }}>
+  <CardActionArea>
+    <CardContent>
+    <Typography gutterBottom variant="h6" component="div" style={{ fontFamily: 'Roboto', fontWeight: 'bold', letterSpacing: '1px', color: '#555', borderBottom: '2px solid #000', paddingBottom: '5px' }}>
+        Order Details
+      </Typography>
+      <Typography variant="h5" component="div" style={{ fontFamily: 'Roboto', fontStyle: 'normal', marginBottom: '10px', color: '#333' }}>
+        <span style={{ fontWeight: 'bold', marginRight: '5px' }}>Order ID:</span> {order.orderId}
+      </Typography>
+      <Typography variant="body1" color="text.primary" style={{ fontFamily: 'Cursive', fontWeight: 'bold', marginBottom: '10px' }}>
+        Service: {order.expertise}
+      </Typography>
+      <Typography variant="body1" color="text.primary" style={{ fontFamily: 'Verdana', fontStyle: 'italic' }}>
+       Total Price: {order.price}
+      </Typography>
+    </CardContent>
+  </CardActionArea>
+  <CardActions>
+  <Button 
+  onClick={() => handleAcceptOrder(order.orderId)} 
+  style={{ 
+    display: 'block', 
+    margin: 'auto', 
+    border: '1px solid black', 
+    borderRadius: '5px',
+    backgroundColor: '#76FF7A',
+    color: 'white',
+    padding: '8px 20px',
+    fontWeight: 'bold',
+    cursor: 'pointer', // Ensure the cursor changes to pointer on hover
+    transition: 'background-color 0.3s ease', // Smooth transition effect
+  }}
+>
+  Accept
+</Button>
+
+
+  </CardActions>
+</Card>
       ))}
-      {acceptingOrderId && <AcceptOrder orderid={acceptingOrderId} />}
+            {acceptingOrderId && <AcceptOrder orderId={acceptingOrderId} />}
     </div>
   );
 };

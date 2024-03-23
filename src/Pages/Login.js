@@ -10,13 +10,10 @@ import { Button } from '@mui/material';
 import { Container } from '@mui/material';
 const Login = ({ onLogin }) => {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = React.useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
+  
+ 
+  const [registrationSuccess, setRegistrationSuccess] = useState(null);
+  const [registrationError, setRegistrationError] = React.useState(null);
   
   const [isLoading, setIsLoading] = useState(false);
 
@@ -42,14 +39,10 @@ const Login = ({ onLogin }) => {
       const response = await axios.post('https://gharaanah.onrender.com/user/login', user);
       if (response.data.status === true) {
         if (response.data.expert === false) {
-
           Cookies.set('authToken', response.data.token,{ expires: 7 });
-          localStorage.setItem('userStage', '1');
-          window.alert(`Login Success`)
-             
+          localStorage.setItem('userStage', '1');    
           onLogin(1);
          navigate("/");
-         
         }
         else if (response.data.expert === true) {
           Cookies.set('authToken', response.data.token, { expires: 7 });
@@ -62,12 +55,12 @@ const Login = ({ onLogin }) => {
 
       }
       else if (response.data.status === false) {
-        window.alert(`${response.data.response} `);
+       setRegistrationError(response.data.response);
       }
 
     } catch (error) {
       console.error('Error sending data:', error);
-      window.alert("try again")
+      setRegistrationError("Error ");
 
      
       setUser({
@@ -84,8 +77,9 @@ const Login = ({ onLogin }) => {
       fontFamily: 'Segoe UI,sans-serif,system-ui',
       backgroundColor: 'rgb(255,255,255)',
       marginTop:5,
-      width: '25%',
-      maxWidth: '450px',
+      maxWidth: '1000px',
+      width: '80%'
+     
     }}>
     <Stack
       sx={{
@@ -204,6 +198,9 @@ const Login = ({ onLogin }) => {
               onChange={handleInputs}
               name="password"></Input>
           </Stack>
+          <br></br>
+                  {registrationSuccess && <Typography variant="body1" sx={{ color: "green", textAlign: "center" }}>{registrationSuccess}</Typography>}
+          {registrationError && <Typography variant="body1" sx={{ color: "red", textAlign: "center" }}>{registrationError}</Typography>}
           
           <Button
             disableElevation
