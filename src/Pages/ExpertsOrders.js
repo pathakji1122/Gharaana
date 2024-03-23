@@ -101,6 +101,7 @@ const ExpertsOrders = () => {
         </Grid>
       ))}
     </Grid>
+    {startingOrderId && <StartOrder orderId={startingOrderId} />}
     {completeOrderId && <CompleteOrder orderId={completeOrderId} />}
 </>
     
