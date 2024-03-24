@@ -54,9 +54,8 @@ const Otp=(orderId)=>{
       },[orderId, navigate]);
     return(
         <>
-        <div style={{ pointerEvents: 'auto' }}>
-        
-        <Dialog open={open} PaperProps={{  }}>
+         <div style={{ pointerEvents: 'auto' }}>
+      <Dialog open={open} PaperProps={{ style: { maxHeight: '80vh' }}}>
         <DialogTitle>
           <IconButton
             aria-label="close"
@@ -69,26 +68,23 @@ const Otp=(orderId)=>{
             }}
           >
             <CloseIcon />
+           
           </IconButton>
         </DialogTitle>
         <DialogContent>
-         <Typography
+          <Typography
             variant="body2"
             sx={{
               textAlign: 'left',
               fontWeight: '600',
-              fontSize: '15px', // Adjusted font size
+              fontSize: '20px',margin:5 // Adjusted font size to 20px
             }}
           >
-            
-          Otp is :{otp}
+            Otp is: {otp}
           </Typography>
-          
         </DialogContent>
       </Dialog>
-          
-      </div>
-        
+    </div>
         </>
     )
 }

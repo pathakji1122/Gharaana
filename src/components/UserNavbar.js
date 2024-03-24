@@ -32,7 +32,7 @@ const UserNavbar = () => {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ background: "rgba(255, 255, 255, 0.1)", boxShadow: "none", }}>
+      <AppBar position="fixed" sx={{ background: "rgba(255, 255, 255, 1)", boxShadow: "none", }}>
         <Container maxWidth="xl">
           <Toolbar
             disableGutters

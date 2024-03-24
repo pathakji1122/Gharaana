@@ -51,9 +51,8 @@ const AcceptOrder = ({ orderId }) => {
 
   return (
     <>
-    <div style={{ pointerEvents: 'auto' }}>
-        
-        <Dialog open={open} PaperProps={{  }}>
+   <div style={{ pointerEvents: 'auto' }}>
+      <Dialog open={open} PaperProps={{ sx: { minWidth: '300px', maxWidth: '80%', borderRadius: '20px' } }}>
         <DialogTitle>
           <IconButton
             aria-label="close"
@@ -69,21 +68,18 @@ const AcceptOrder = ({ orderId }) => {
           </IconButton>
         </DialogTitle>
         <DialogContent>
-         <Typography
+          <Typography
             variant="body2"
             sx={{
               textAlign: 'left',
               fontWeight: '600',
-              fontSize: '15px', // Adjusted font size
+              fontSize: '18px', // Increased font size
             }}
           >
-            
-          Accepted
+           Order Accepted
           </Typography>
-          
         </DialogContent>
       </Dialog>
-          
       </div>
     </>
   );

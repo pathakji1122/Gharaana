@@ -9,54 +9,80 @@ const Intro = () => {
 
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "150vh", flexDirection: theme.breakpoints.down('sm') ? 'column' : 'row' }}>
-        <Paper elevation={20} style={{ borderRadius: "20px", overflow: "hidden", marginRight: theme.breakpoints.down('sm') ? 0 : "5%", marginBottom: theme.breakpoints.down('sm') ? '10px' : 0 }}>
-          <img src={home} alt="Background" style={{ width: "400px", height: "100%", objectFit: "cover" }} />
-        </Paper>
-        <div style={{ flex: 1, textAlign: "center" }}>
-          <Typography variant="h4" style={{ color: "gold", fontFamily: "Arial", fontSize: "5vw", margin: "0 5%" }}>
-            Gharaana
-          </Typography>
-          <Typography variant="h6" style={{ marginBottom: "20px", fontSize: "3vw", fontFamily: "Arial" }}>
-            From Out to In: Where your every need finds its way home.
-          </Typography>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '5%' }}>
-            <Autocomplete
-              id="free-solo-demo"
-              freeSolo
-              options={expertise.map((option) => option.label)}
-              style={{
-                width: '90%',
-                maxWidth: '800px',
-                borderRadius: '12px', // Adjust the border radius
-              }}
-              PaperComponent={({ children }) => (
-                <Paper elevation={3} style={{ marginTop: '8px', width: 'auto', borderRadius: '12px' }}>
-                  {children}
-                </Paper>
-              )}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Tell us about your need"
-                  variant="outlined"
-                  style={{
-                    borderRadius: '12px', // Adjust the border radius
-                    borderTopRightRadius: 0,
-                    borderBottomRightRadius: 0,
-                  }}
-                  InputProps={{
-                    style: { borderTopRightRadius: 0, borderBottomRightRadius: 0 },
-                    endAdornment: (
-                      <SearchIcon style={{ cursor: 'pointer', fontSize: '2vw', marginLeft: '-35px' }} />
-                    ),
-                  }}
-                />
-              )}
-            />
-          </div>
+       <div style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      minHeight: "100vh", // Set minimum height to cover the viewport
+      marginTop: 10,
+      flexDirection: theme.breakpoints.down('sm') ? 'column' : 'row', // Flex direction based on screen size
+    }}>
+      <Paper elevation={10} style={{
+        borderRadius: "20px",
+       
+      }}>
+        <img src={home} alt="Background" style={{
+          width: "100%",
+          maxWidth:"1000px",
+          height: "100%",
+          objectFit: "cover", // Maintain aspect ratio and cover entire area
+          borderRadius: "20px",
+         
+        }} />
+      </Paper>
+      <div style={{ flex: 1, textAlign: "center",marginTop:20 }}>
+        <Typography variant="h4" style={{
+          color: "gold",
+          fontFamily: "Arial",
+          fontSize: "clamp(2rem, 5vw, 3.5rem)", // Responsive font size
+          margin: "0 5%",
+        }}>
+          Gharaana
+        </Typography>
+        <Typography variant="h6" style={{
+          marginBottom: "20px",
+          fontSize: "clamp(1.5rem, 3vw, 2rem)", // Responsive font size
+          fontFamily: "Arial",
+        }}>
+          From Out to In: Where your every need finds its way home.
+        </Typography>
+        <div style={{ display: 'flex', justifyContent: 'center', margin: '0 5%' }}>
+          <Autocomplete
+            id="free-solo-demo"
+            freeSolo
+            options={expertise.map((option) => option.label)}
+            style={{
+              width: '100%',
+              maxWidth: '800px',
+              borderRadius: '12px',
+            }}
+            PaperComponent={({ children }) => (
+              <Paper elevation={3} style={{ marginTop: '8px', width: 'auto', borderRadius: '12px' }}>
+                {children}
+              </Paper>
+            )}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Tell us about your need"
+                variant="outlined"
+                style={{
+                  borderRadius: '12px',
+                  borderTopRightRadius: 0,
+                  borderBottomRightRadius: 0,
+                }}
+                InputProps={{
+                  style: { borderTopRightRadius: 0, borderBottomRightRadius: 0 },
+                  endAdornment: (
+                    <SearchIcon style={{ cursor: 'pointer', fontSize: 'clamp(1.5rem, 2vw, 2.5rem)', marginLeft: '-35px' }} />
+                  ),
+                }}
+              />
+            )}
+          />
         </div>
       </div>
+    </div>
     </>
   );
 }

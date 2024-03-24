@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom'; 
-import { Typography } from '@mui/material';
+import { Typography,Card } from '@mui/material';
 import { Input } from '@mui/material';
 import { Stack } from '@mui/material';
 import { Button } from '@mui/material';
@@ -72,13 +72,15 @@ const Login = ({ onLogin }) => {
   };
 
   return (
+    <Card>
     <Container
     sx={{
       fontFamily: 'Segoe UI,sans-serif,system-ui',
       backgroundColor: 'rgb(255,255,255)',
       marginTop:5,
       maxWidth: '1000px',
-      width: '80%'
+      width: '80%',
+      borderColor:"black"
      
     }}>
     <Stack
@@ -233,6 +235,7 @@ const Login = ({ onLogin }) => {
       </Stack>
     </Stack>
   </Container>
+  </Card>
   );
 
 

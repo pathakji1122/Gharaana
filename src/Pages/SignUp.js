@@ -83,22 +83,27 @@ const SignUp = () => {
   };
   return (
  <>
-  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <Card sx={{
-          backgroundColor: 'inherit',
-          width: '100%',
-          padding: '20px',
-          display: 'flex',
-          flexDirection: 'column',
-          rowGap: '10px',
-          alignItems: 'center',
-          border: 'none',
-          maxWidth: '450px',
-        }}>
-            <Typography variant="h5" sx={{ fontFamily: 'system-ui' }}>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '100vh',
+    }}>
+         <Card sx={{
+        backgroundColor: 'inherit',
+        width: '100%',
+        padding: '20px',
+        display: 'flex',
+        flexDirection: 'column',
+        rowGap: '10px',
+        alignItems: 'center',
+        border: 'none',
+        maxWidth: '450px',
+      }}>
+             <Typography variant="h5" sx={{ fontFamily: 'system-ui' }}>
         SignUp 
       </Typography>
-      <Stack sx={{ alignItems: 'center', width: '100%' }} spacing="20px">
+      <Stack spacing="20px" sx={{ alignItems: 'center', width: '100%' }}> 
       <Stack
           sx={{
             alignItems: 'flex-start',
@@ -294,7 +299,7 @@ const SignUp = () => {
           </Stack>
         </Stack>
         
-          <Stack
+        <Stack
           sx={{
             alignItems: 'flex-start',
             width: '100%',
@@ -364,18 +369,7 @@ const SignUp = () => {
           onClick={handleSubmit} type="submit">
                       {loading ? "Signingup..." : "Signup"}    
         </Button>
-
-          
-            <Stack spacing={1} sx={{ width: 300 }}>
   
-</Stack>
-
-<Stack spacing={1} sx={{ width: 300 }}>
-  
-</Stack>
- 
-      
-            
             </Card>   
             </div>
         </>

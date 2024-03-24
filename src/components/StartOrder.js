@@ -46,11 +46,9 @@ const StartOrder=(orderId)=>{
 
     return(
         <>
-         <div style={{ pointerEvents: 'auto' }}>
-        
-        <Dialog open={open} PaperProps={{  }}>
+<div style={{ pointerEvents: 'auto' }}>
+      <Dialog open={open} PaperProps={{ sx: { minWidth: '300px', maxWidth: '80%', borderRadius: '20px' } }}>
         <DialogTitle>
-        
           <IconButton
             aria-label="close"
             onClick={handleClose}
@@ -65,27 +63,22 @@ const StartOrder=(orderId)=>{
           </IconButton>
         </DialogTitle>
         <DialogContent>
-         <Typography
+          <Typography
             variant="body2"
             sx={{
               textAlign: 'left',
               fontWeight: '600',
-              fontSize: '15px', // Adjusted font size
+              fontSize: '18px', // Increased font size for better visibility
             }}
           >
-            
-          Start Order
-
+            Start Order
           </Typography>
-          <Button  onClick={() => startorder(orderId)} >
-            Start 
+          <Button onClick={() => startorder(orderId)} sx={{ mt: 2 }}> {/* Add margin top for better spacing */}
+            Start
           </Button>
-          
         </DialogContent>
       </Dialog>
-          
-      </div>
-        
+    </div>
         
         </>
     )

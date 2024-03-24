@@ -10,9 +10,24 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Typography from "@mui/material/Typography";
-import AdbIcon from "@mui/icons-material/Adb";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
 
 const ExpertNavbar = () => {
+  const pages = [
+    { label: "Home", path: "/" },
+    { label: "Post Ad", path: "/about" },
+    { label: "Orders for you", path: "/expertorders" },  
+  ];
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -28,39 +43,106 @@ const ExpertNavbar = () => {
     <>
     
        <AppBar position="static" sx={{ background: "white", borderRadius: "20px" }}>
-        <Toolbar>
-        <Typography
-                  variant="h6"
+       <Container maxWidth="xl">
+          <Toolbar
+            disableGutters
+            sx={{
+              justifyContent: "space-between",
+              color: "black", // Set text color to black
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                variant="h6"
+                sx={{
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  textDecoration: "none",
+                  flexGrow: 1,
+                  color: "black",
+                }}
+              >
+                Gharaana
+              </Typography>
+              <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  color="inherit"
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
                   sx={{
-                    fontFamily: "monospace",
-                    fontWeight: 700,
-                    letterSpacing: ".3rem",
-                    textDecoration: "none",
-                    flexGrow: 1,
+                    display: { xs: "block", md: "none" },
                   }}
                 >
-                  Gharaana
-                </Typography>
-         
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton size="large" aria-label="menu" color="inherit">
-              <AdbIcon />
-            </IconButton>
-          </Box>
+                  {pages.map((page) => (
+                    <NavLink
+                      key={page.label}
+                      to={page.path}
+                      style={{
+                        textDecoration: "none",
+                        paddingRight: "20px", // Add more space if needed
+                        color: "black", // Set text color to black
+                      }}
+                    >
+                      <MenuItem onClick={handleCloseNavMenu}>
+                        <Typography textAlign="center">{page.label}</Typography>
+                      </MenuItem>
+                    </NavLink>
+                  ))}
+                </Menu>
+              </Box>
+            </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button sx={{ my: 2, color: "black" }} component={NavLink} to="/">
-              Home
-            </Button>
-            <Button sx={{ my: 2, color: "black" }} component={NavLink} to="/offers">
-              Post Ad
-            </Button>
-            <Button sx={{ my: 2, color: "black" }} component={NavLink} to="/expertorders">
-              Orders For You
-            </Button>
-          </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+                justifyContent: "flex-end",
+              }}
+            >
+              {pages.map((page) => (
+                <NavLink
+                  key={page.label}
+                  to={page.path}
+                  style={{
+                    textDecoration: "none",
+                    marginRight: "20px", // Add more space if needed
+                  }}
+                >
+                  <Button
+                    sx={{ color: "black" }} // Set text color to black
+                  >
+                    {page.label}
+                  </Button>
+                </NavLink>
+              ))}
+            </Box>
+            <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenMenu} sx={{ p: 0 }}>
                 <Avatar alt="User Avatar" src="/static/images/avatar.jpg" />
@@ -92,7 +174,11 @@ const ExpertNavbar = () => {
               </MenuItem>
             </Menu>
           </Box>
-        </Toolbar>
+          </Toolbar>
+        </Container>
+        
+    
+      
       </AppBar>
     </>
   );
