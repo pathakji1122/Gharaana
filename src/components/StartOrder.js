@@ -17,8 +17,9 @@ const StartOrder=(orderId)=>{
     const navigate = useNavigate();
     const [open, setOpen] = useState(true);
     const handleClose = () => {
-      navigate('/');
+      navigate('/expertsaccepted');
       setOpen(false);
+      window.location.reload();
     };
 
     const startorder = async (orderId) => {

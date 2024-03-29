@@ -32,13 +32,15 @@ const UserNavbar = () => {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ background: "rgba(255, 255, 255, 1)", boxShadow: "none", }}>
+    <div style={{ marginBottom: "60px" }}>
+      <AppBar position="fixed" sx={{ background: "rgba(255, 255, 255, 1)", boxShadow: "none"}}>
         <Container maxWidth="xl">
           <Toolbar
             disableGutters
             sx={{
               justifyContent: "space-between",
-              color: "black", // Set text color to black
+              color: "black",
+           // Set text color to black
             }}
           >
             <Box
@@ -135,7 +137,7 @@ const UserNavbar = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      
+      </div>
     </>
   );
 };

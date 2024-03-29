@@ -9,9 +9,10 @@ import { Divider } from '@mui/material';
 import { Stepper, Step, StepLabel } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Otp from '../components/Otp';
+import OrderStatus from "../components/OrderStatus";
 const Myorder = () => {
   const[getOtpOrderId,setGetOtpOrderId]=useState(null);
-  
+  const [orderStatusId,SetOrderStatusId]=useState(null);
 const steps = ['Placed', 'Accepted', 'Started','Completed'];
 const getStep = (orderStatus) => {
   switch (orderStatus) {
@@ -74,6 +75,15 @@ const getStep = (orderStatus) => {
       console.error("Error initiating payment:", error);
     }
   };
+  const handleOrderStatusClick = (order) => {
+   
+    console.log("Order status clicked for order:", order);
+    SetOrderStatusId(order.orderId);
+  }
+  const handleCloseOrderStatus = () => {
+    SetOrderStatusId(null); // Reset orderStatusId state
+  };
+  
 
   const redirectToRazorpay = async (order) => {
     const options = {
@@ -103,36 +113,72 @@ const getStep = (orderStatus) => {
   const GetOtp = (orderId) => {
     setGetOtpOrderId(orderId);
   };
+  const handleRefresh = async () => {
+    try {
+      const authToken = Cookies.get("authToken");
+      const response = await axios.get(
+        "https://gharaanah.onrender.com/customer/myorder",
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      setOrders(response.data.orderList);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    }
+  };
 
   return (
     <Grid container spacing={2} justifyContent="center">
+       <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+  <Button
+    variant="contained"
+    color="primary"
+    onClick={handleRefresh}
+    style={{ margin: '20px' }}
+  >
+    Refresh
+  </Button>
+</div>
       {orders.map((order) => (
         <Grid item key={order.id} xs={12} sm={6} md={4} lg={3}>
           <Card sx={{ maxWidth: 345 }}>
             <CardContent>
               <Typography variant="h5" component="div" gutterBottom>
                 Order no {order.orderId}
-                <IconButton color="primary">
-                  <MoreHorizIcon />
+                <IconButton color="primary" onClick={() => handleOrderStatusClick(order)}  >
+                  <MoreHorizIcon/>
                 </IconButton>
               </Typography>
               <Divider />
               <Typography variant="body2" color="text.secondary">
                 {order.expertise}
               </Typography>
-              <Stepper activeStep={getStep(order.orderStatus)} alternativeLabel>
-                {steps.map((label) => (
-                  <Step key={label}>
-                    <StepLabel>{label}</StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
+              {order.orderStatus !== 'CANCELLED' && (
+  <Stepper activeStep={getStep(order.orderStatus)} alternativeLabel>
+    {steps.map((label) => (
+      <Step key={label}>
+        <StepLabel>{label}</StepLabel>
+      </Step>
+    ))}
+  </Stepper>
+)}
+
               <Typography variant="body2" color="text.secondary">
                 Total Amount: {order.price}
               </Typography>
+              {
+                order.orderStatus==='CANCELLED'&&(
+                  <Typography>
+                    Cancelled Order
+                  </Typography>
+                )
+              }
             </CardContent>
             <div style={{ backgroundColor: '#f5f5f5' }}>
-  {!order.payment && (
+  {!order.payment && order.orderStatus!='CANCELLED'&& (
     <CardActions sx={{ justifyContent: 'space-between' }}> {/* Change justifyContent to 'space-between' */}
       <Button
         size="small"
@@ -164,7 +210,8 @@ const getStep = (orderStatus) => {
         </Grid>
         
       ))}
-      {getOtpOrderId && <Otp orderId={getOtpOrderId} />}
+             {orderStatusId && <OrderStatus orderId={orderStatusId} onClose={handleCloseOrderStatus} />}
+    {getOtpOrderId && <Otp orderId={getOtpOrderId} />}
     </Grid>
     
   );

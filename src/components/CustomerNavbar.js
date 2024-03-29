@@ -166,7 +166,7 @@ const CustomerNavbar = () => {
               <MenuItem onClick={handleCloseMenu} component={NavLink} to="/myorder">
                 My Orders
               </MenuItem>
-              <MenuItem onClick={handleCloseMenu} component={NavLink} to="/profile">
+              <MenuItem onClick={handleCloseMenu} component={NavLink} to="/customerprofile">
                 Profile
               </MenuItem>
               <MenuItem onClick={handleCloseMenu} component={NavLink} to="/logout">

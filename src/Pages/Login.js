@@ -72,14 +72,25 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <Card>
+   
+    <Card
+     sx={{
+      fontFamily: 'Segoe UI,sans-serif,system-ui',
+       
+      marginTop:10,
+      marginLeft:2, 
+      maxWidth: '700px',
+      width: '90%',
+      borderColor:"black"
+     
+    }}>
     <Container
     sx={{
       fontFamily: 'Segoe UI,sans-serif,system-ui',
       backgroundColor: 'rgb(255,255,255)',
       marginTop:5,
-      maxWidth: '1000px',
-      width: '80%',
+      maxWidth: '600px',
+      width: '100%',
       borderColor:"black"
      
     }}>
@@ -236,6 +247,7 @@ const Login = ({ onLogin }) => {
     </Stack>
   </Container>
   </Card>
+ 
   );
 
 

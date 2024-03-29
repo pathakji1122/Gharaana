@@ -11,7 +11,6 @@ const ExpertC = () => {
   const authToken = Cookies.get('authToken');
   const [orders, setOrders] = useState([]);
   const [acceptingOrderId, setAcceptingOrderId] = useState(null); // New state to track order being accepted
-  const [showPopup, setShowPopup] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,12 +30,42 @@ const ExpertC = () => {
     };
     fetchData();
   }, [authToken]);
+  const handleRefresh = async () => {
+    // Fetch orders again
+    try {
+      const response = await axios.get(
+        'https://gharaanah.onrender.com/expert/checkorders',
+        {
+          headers: {
+            'Authorization': `Bearer ${authToken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      setOrders(response.data.orderList);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    }
+  };
+
 
   const handleAcceptOrder = (orderId) => {
     setAcceptingOrderId(orderId);
   };
   return (
     <div>
+   <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+  <Button
+    variant="contained"
+    color="primary"
+    onClick={handleRefresh}
+    style={{ margin: '20px' }}
+  >
+    Refresh
+  </Button>
+</div>
+
+
       {orders.map(order => (
      
 <Card key={order.orderId} sx={{ maxWidth: 500, margin: 2, borderRadius: 4, boxShadow: 3 }}>

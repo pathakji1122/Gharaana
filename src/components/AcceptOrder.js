@@ -16,8 +16,9 @@ const AcceptOrder = ({ orderId }) => {
   const navigate = useNavigate(); // Get the navigate function
   const [open, setOpen] = useState(false);
   const handleClose = () => {
-    navigate('/');
+    navigate('/expertorders');
     setOpen(false);
+    window.location.reload();
      // Navigate to the home page
   };
   useEffect(() => {

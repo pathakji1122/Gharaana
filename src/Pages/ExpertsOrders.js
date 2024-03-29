@@ -52,7 +52,7 @@ const ExpertsOrders = () => {
   };
 
   const handleStartOrder = (orderId) => {
-         
+  
     console.log("Starting order:", orderId);
     setstartingOrderId(orderId);
 
@@ -60,10 +60,38 @@ const ExpertsOrders = () => {
   const handleCompleteOrder=(orderId)=>{
     setCompleteOrderId(orderId);
   }
+  const handleRefresh = async () => {
+   
+    try {
+      const authToken = Cookies.get("authToken");
+      const response = await axios.get(
+        "https://gharaanah.onrender.com/expert/myorders",
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      setOrders(response.data.orderList);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    }
+  };
 
   return (
     <>
     <Grid container spacing={2} justifyContent="center">
+    <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+  <Button
+    variant="contained"
+    color="primary"
+    onClick={handleRefresh}
+    style={{ margin: '20px' }}
+  >
+    Refresh
+  </Button>
+  </div>
+      
       {orders.map((order) => (
         <Grid item key={order.id} xs={12} sm={6} md={4} lg={3}>
           <Card sx={{ maxWidth: 445,margin:5}}>

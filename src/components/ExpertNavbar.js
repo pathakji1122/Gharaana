@@ -166,7 +166,7 @@ const ExpertNavbar = () => {
               <MenuItem onClick={handleCloseMenu} component={NavLink} to="/expertsaccepted">
                 My Orders
               </MenuItem>
-              <MenuItem onClick={handleCloseMenu} component={NavLink} to="/profile">
+              <MenuItem onClick={handleCloseMenu} component={NavLink} to="/expertprofile">
                 Profile
               </MenuItem>
               <MenuItem onClick={handleCloseMenu} component={NavLink} to="/logout">
