@@ -68,8 +68,9 @@ const getStep = (orderStatus) => {
         },
         config
       );
+      console.log(response.data.paymentId);
       setPaymentId(response.data.paymentId);
-
+             
       redirectToRazorpay(order);
     } catch (error) {
       console.error("Error initiating payment:", error);
@@ -94,6 +95,28 @@ const getStep = (orderStatus) => {
       order_id: paymentId,
       handler: function (response) {
         console.log(response);
+  
+          console.log(paymentId);
+          const authToken = Cookies.get("authToken");
+          const config = {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          };
+    
+          axios.post(
+            "https://gharaanah.onrender.com/payments/completepayment",
+             paymentId ,config
+          )
+          .then((response) => {
+            // Handle successful completion of payment
+            console.log("Payment completed:", response.data);
+          })
+          .catch((error) => {
+            // Handle errors
+            console.error("Error completing payment:", error);
+          });
+      
       },
       prefill: {
         name: "",
