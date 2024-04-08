@@ -38,7 +38,7 @@ public class NitController {
         return new NitOrderResponse("Some Wrong Info", false);
     }
 
-    @PostMapping(path = "acceptorder")
+    @PostMapping(path = "acceptrequest")
     public NitAcceptOrderResponse nitAcceptOrder(@RequestHeader("Authorization") String authorizationHeader, @RequestBody NitAcceptOrderRequest nitAcceptOrderRequest) {
         String token = authorizationHeader.replace("Bearer ", "");
         Boolean verify = jwtUtil.isTokenValid(token);
@@ -56,7 +56,7 @@ public class NitController {
         if (verify) {
             return orderService.orderRequest(token);
         }
-        return new NitCheckOrderResponse(null, false, null);
+        return new NitCheckOrderResponse(null, false);
     }
 
     @PostMapping(path = "cancel")
@@ -85,6 +85,25 @@ public class NitController {
            return userService.nitProfile(token);
        }
          return new NitProfileResponse(null,false);
+   }
+   @GetMapping (path = "buddy")
+    public BuddyResponse buddyRequest(@RequestHeader("Authorization") String authorizationHeader){
+       String token = authorizationHeader.replace("Bearer ", "");
+       Boolean verify = jwtUtil.isTokenValid(token);
+       if (verify) {
+           return orderService.buddyOrder(token);
+       }
+       return new BuddyResponse(null,false);
+
+   }
+   @GetMapping(path = "studentrequest")
+    public StudentResponse studentOrder(@RequestHeader("Authorization") String authorizationHeader){
+       String token = authorizationHeader.replace("Bearer ", "");
+       Boolean verify = jwtUtil.isTokenValid(token);
+       if (verify) {
+               return orderService.studentRequest(token);
+       }
+       return new StudentResponse(null,false);
    }
 
 

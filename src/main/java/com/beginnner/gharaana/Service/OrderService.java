@@ -293,7 +293,6 @@ public class OrderService {
         return new NitOrderResponse("Order Placed Successfully",true);
     }
     public NitAcceptOrderResponse NitAccept(NitAcceptOrderRequest nitAcceptOrderRequest,String token){
-
         String phoneNo=jwtUtil.extractNitStudentPhoneNo(token);
         Student buddyA=nitRepository.findOneByPhoneNo(phoneNo);
         OrderNIT order=orderNitRepository.findByOrderId(nitAcceptOrderRequest.orderId);
@@ -309,14 +308,21 @@ public class OrderService {
     }
     public NitCheckOrderResponse orderRequest(String token){
         String phoneNo=jwtUtil.extractNitStudentPhoneNo(token);
-        Student student=nitRepository.findOneByPhoneNo(phoneNo);
        List<OrderNIT>orderNITList=orderNitRepository.findByOrderStatus(OrderStatus.NOT_ACCEPTED);
+       List<NitCheckOrder>nitCheckOrders=new ArrayList<>();
        for(int i =0;i<orderNITList.size();i++){
            if(orderNITList.get(i).phoneNo==phoneNo){
                orderNITList.remove(orderNITList.get(i));
            }
+
        }
-       return new NitCheckOrderResponse(orderNITList,true,student);
+       for(int i = 0;i<orderNITList.size();i++){
+           Student student=nitRepository.findOneByPhoneNo(orderNITList.get(i).phoneNo);
+           NitCheckOrder nitCheckOrder=new NitCheckOrder(orderNITList.get(i),student);
+           nitCheckOrders.add(nitCheckOrder);
+       }
+
+       return new NitCheckOrderResponse(nitCheckOrders,true);
 
 
 
@@ -334,19 +340,30 @@ public class OrderService {
 
     }
     public CompleteNitOrderResponse completeNitOrder(CompleteNitOrderRequest completeNitOrderRequest,String token){
-
         OrderNIT orderNIT=orderNitRepository.findByOrderId(completeNitOrderRequest.orderId);
         String phoneNo= jwtUtil.extractNitStudentPhoneNo(token);
         if(orderNIT.buddy.phoneNo==phoneNo){
             if(completeNitOrderRequest.otp==orderNIT.otp){
+                Student buddy=nitRepository.findOneByPhoneNo(phoneNo);
+                buddy.coin=buddy.coin+10;
+                nitRepository.save(buddy);
                 return new CompleteNitOrderResponse("Order Completed ",true);
-
             }
             return new CompleteNitOrderResponse("Otp mismatch",false);
-
         }
-
         return new CompleteNitOrderResponse("Error Occured",false);
+    }
+    public BuddyResponse buddyOrder(String token){
+        String phoneNo=jwtUtil.extractNitStudentPhoneNo(token);
+        Student buddyCurrent=nitRepository.findOneByPhoneNo(phoneNo);
+        List<OrderNIT>orderNITList=orderNitRepository.findByBuddy(buddyCurrent);
+        return new BuddyResponse(orderNITList,true);
+    }
+    public StudentResponse studentRequest(String token){
+        String phoneNo= jwtUtil.extractNitStudentPhoneNo(token);
+        Student student=nitRepository.findOneByPhoneNo(phoneNo);
+        List<OrderNIT>orderNITList=orderNitRepository.findByPhoneNo(phoneNo);
+        return new StudentResponse(orderNITList,true);
     }
 }
 

@@ -1,21 +1,21 @@
 package com.beginnner.gharaana.Object;
 
+import com.beginnner.gharaana.Entity.NitCheckOrder;
 import com.beginnner.gharaana.Entity.OrderNIT;
 import com.beginnner.gharaana.Entity.Student;
 
 import java.util.List;
 
 public class NitCheckOrderResponse{
-               public List<OrderNIT> requests;
+         public  List<NitCheckOrder>nitCheckOrder;
            public boolean action;
-           public Student student;
 
-    public NitCheckOrderResponse(List<OrderNIT> requests, Boolean action, Student student) {
-        this.requests=requests;
+
+    public NitCheckOrderResponse(List<NitCheckOrder> nitCheckOrder, Boolean action) {
+        this.nitCheckOrder=nitCheckOrder;
         this.action=action;
-        this.student=student;
+
     }
 
-    public NitCheckOrderResponse(String some_wrong_info, boolean action) {
-    }
+
 }

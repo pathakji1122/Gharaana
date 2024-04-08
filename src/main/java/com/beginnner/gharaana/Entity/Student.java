@@ -14,7 +14,9 @@ public class Student {
     public String password;
     public String enrollmentNo;
     public String branch;
-    public Student(String phoneNo,String name,String year,String hostel,String password,String enrollmentNo,String branch){
+
+    public int coin;
+    public Student(String phoneNo,String name,String year,String hostel,String password,String enrollmentNo,String branch,int coin){
         this.phoneNo=phoneNo;
         this.name=name;
         this.year=year;
@@ -22,7 +24,7 @@ public class Student {
         this.password=password;
         this.enrollmentNo=enrollmentNo;
         this.branch=branch;
-
+        this.coin=coin;
     }
 }
 

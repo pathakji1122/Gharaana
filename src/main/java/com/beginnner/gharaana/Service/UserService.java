@@ -257,7 +257,7 @@ public class UserService {
         }
         String response=SignupRequestValidator.nitSignupCheck(nitSignupRequest);
         if(response==null) {
-            Student studentNow = new Student(nitSignupRequest.phoneNo, nitSignupRequest.name, nitSignupRequest.year, nitSignupRequest.enrollmentNo.toUpperCase(),nitSignupRequest.password, nitSignupRequest.hostel,nitSignupRequest.branch);
+            Student studentNow = new Student(nitSignupRequest.phoneNo, nitSignupRequest.name, nitSignupRequest.year, nitSignupRequest.enrollmentNo.toUpperCase(),nitSignupRequest.password, nitSignupRequest.hostel,nitSignupRequest.branch,100);
             nitRepository.save(studentNow);
             return new NitSignupResponse("Account Created ,Enjoy your stay at Gharaana",true);
         }
